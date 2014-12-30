@@ -1,0 +1,28 @@
+{
+  'version': 0,
+  'case-sensitive': 'false',
+  'roots': [
+    {
+      'type': 'directory',
+      'name': "/Volumes/Secondary/Users/andyvand/Downloads/RTL8111_driver_for_OS_X/build/Release/RealtekRTL8111.kext/Modules",
+      'contents': [
+        {
+          'type': 'file',
+          'name': "module.modulemap",
+          'external-contents': "/Volumes/Secondary/Users/andyvand/Downloads/RTL8111_driver_for_OS_X/build/Release/RealtekRTL8111.kext/Contents/Modules/module.modulemap"
+        }
+      ]
+    },
+    {
+      'type': 'directory',
+      'name': "/Volumes/Secondary/Users/andyvand/Downloads/RTL8111_driver_for_OS_X/build/Release/RealtekRTL8111.kext/family",
+      'contents': [
+        {
+          'type': 'file',
+          'name': "RealtekRTL8111-Swift.h",
+          'external-contents': "/Volumes/Secondary/Users/andyvand/Downloads/RTL8111_driver_for_OS_X/build/Release/System/Library/Frameworks/Kernel.framework/Contents/Headers/family/RealtekRTL8111-Swift.h"
+        }
+      ]
+    }
+  ]
+}
