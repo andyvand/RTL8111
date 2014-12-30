@@ -81,6 +81,10 @@ Changelog
     - Improved deadlock detection logic in order to avoid false positives due to lost interrupts.
 - Version 1.2.0 (2014-04-23):
     - Updated underlying linux sources from Realtek to 8.037.00. Improved interrupt mitigate to use a less aggressive value for 10/100 MBit connections.
+- Version 1.3.5 (2014-12-30)
+    - Added MAC address spoofing (IOMACAdress key in the Info.plist)
+    - Added userclient and prefpane for setting MAC address after boot
+    - Various code improvements
 
 Known Issues
 - There are still performance problems with regard to SMB in certain configurations. My tests indicate that Apple's Broadcom driver shows the same behavior with those configurations. Obviously it's a more general problem that is not limited to my driver.
@@ -88,4 +92,4 @@ Known Issues
 
 Building from Source
 
-I'm using XCode 4.6.3 for development. You can get a free copy of XCode after becoming a member of the Apple developer program. The free membership is sufficient in order to get access to development tools and documentation.
+I'm using XCode 6.1 for development. You can get a free copy of XCode after becoming a member of the Apple developer program. The free membership is sufficient in order to get access to development tools and documentation.
