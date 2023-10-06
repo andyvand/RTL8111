@@ -96,9 +96,79 @@
 			<key>intrMitigate</key>
 			<integer>53080</integer>
 		</dict>
+		<key>Killer E2500 PCIe Adapter</key>
+		<dict>
+			<key>CFBundleIdentifier</key>
+			<string>com.insanelymac.${PRODUCT_NAME:rfc1034identifier}</string>
+			<key>Driver_Version</key>
+			<string>$MODULE_VERSION</string>
+			<key>IOClass</key>
+			<string>RTL8111</string>
+			<key>IOUserClientClass</key>
+			<string>RTL8111Client</string>
+			<key>IOPCIMatch</key>
+			<string>0x250210ec</string>
+			<key>IOProbeScore</key>
+			<integer>1000</integer>
+			<key>IOMACAddress</key>
+			<data>fG34rJ4e</data>
+			<key>IOProviderClass</key>
+			<string>IOPCIDevice</string>
+			<key>Model</key>
+			<string>RTL8111/RTL8168</string>
+			<key>Vendor</key>
+			<string>Realtek</string>
+			<key>disableASPM</key>
+			<true/>
+			<key>enableCSO6</key>
+			<true/>
+			<key>enableEEE</key>
+			<true/>
+			<key>enableTSO4</key>
+			<true/>
+			<key>enableTSO6</key>
+			<true/>
+			<key>intrMitigate</key>
+			<integer>53080</integer>
+		</dict>
+		<key>D-Link RTL8111 PCIe Adapter</key>
+		<dict>
+			<key>CFBundleIdentifier</key>
+			<string>com.insanelymac.${PRODUCT_NAME:rfc1034identifier}</string>
+			<key>Driver_Version</key>
+			<string>$MODULE_VERSION</string>
+			<key>IOClass</key>
+			<string>RTL8111</string>
+			<key>IOUserClientClass</key>
+			<string>RTL8111Client</string>
+			<key>IOPCIMatch</key>
+			<string>0x43001186</string>
+			<key>IOProbeScore</key>
+			<integer>1000</integer>
+			<key>IOMACAddress</key>
+			<data>fG34rJ4e</data>
+			<key>IOProviderClass</key>
+			<string>IOPCIDevice</string>
+			<key>Model</key>
+			<string>RTL8111/RTL8168</string>
+			<key>Vendor</key>
+			<string>Realtek</string>
+			<key>disableASPM</key>
+			<true/>
+			<key>enableCSO6</key>
+			<true/>
+			<key>enableEEE</key>
+			<true/>
+			<key>enableTSO4</key>
+			<true/>
+			<key>enableTSO6</key>
+			<true/>
+			<key>intrMitigate</key>
+			<integer>53080</integer>
+		</dict>
 	</dict>
 	<key>NSHumanReadableCopyright</key>
-	<string>Copyright © 2013 Laura Müller. All rights reserved, enhancements copyright © 2014 AnV Software. All rights reserved.</string>
+	<string>Copyright © 2013 Laura Müller. All rights reserved, enhancements copyright © 2014-2023 AnV Software. All rights reserved.</string>
 	<key>OSBundleLibraries</key>
 	<dict>
 		<key>com.apple.iokit.IONetworkingFamily</key>

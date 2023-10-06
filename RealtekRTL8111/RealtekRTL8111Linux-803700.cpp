@@ -271,7 +271,67 @@ const struct RTLChipInfo rtl_chip_info[] = {
        RxEarly_off_V2 | (RX_DMA_BURST << RxCfgDMAShift),
        0xff7e1880,
        Jumbo_Frame_9k),
-    
+
+     _R("RTL8168EP/8111EP",
+        CFG_METHOD_28,
+        RxCfg_128_int_en | RxEarly_off_V2 | (RX_DMA_BURST << RxCfgDMAShift),
+        0xff7e5880,
+        Jumbo_Frame_9k),
+
+     _R("RTL8168H/8111H",
+        CFG_METHOD_29,
+        RxCfg_128_int_en | RxEarly_off_V2 | (RX_DMA_BURST << RxCfgDMAShift),
+        0xff7e5880,
+        Jumbo_Frame_9k),
+
+     _R("RTL8168H/8111H",
+        CFG_METHOD_30,
+        RxCfg_128_int_en | RxEarly_off_V2 | (RX_DMA_BURST << RxCfgDMAShift),
+        0xff7e5880,
+        Jumbo_Frame_9k),
+
+     _R("RTL8168FP/8111FP",
+        CFG_METHOD_31,
+        RxCfg_128_int_en | RxEarly_off_V2 | (RX_DMA_BURST << RxCfgDMAShift),
+        0xff7e5880,
+        Jumbo_Frame_9k),
+
+     _R("RTL8168FP/8111FP",
+        CFG_METHOD_32,
+        RxCfg_128_int_en | RxEarly_off_V2 | (RX_DMA_BURST << RxCfgDMAShift),
+        0xff7e5880,
+        Jumbo_Frame_9k),
+
+     _R("RTL8168FP/8111FP",
+        CFG_METHOD_33,
+        RxCfg_128_int_en | RxEarly_off_V2 | (RX_DMA_BURST << RxCfgDMAShift),
+        0xff7e5880,
+        Jumbo_Frame_9k),
+
+     _R("RTL8168FP/8111FP",
+        CFG_METHOD_34,
+        RxCfg_128_int_en | RxEarly_off_V2 | (RX_DMA_BURST << RxCfgDMAShift),
+        0xff7e5880,
+        Jumbo_Frame_9k),
+
+     _R("RTL8168H/8111H",
+        CFG_METHOD_35,
+        RxCfg_128_int_en | RxEarly_off_V2 | (RX_DMA_BURST << RxCfgDMAShift),
+        0xff7e5880,
+        Jumbo_Frame_9k),
+
+     _R("RTL8168H/8111H",
+        CFG_METHOD_36,
+        RxCfg_128_int_en | RxEarly_off_V2 | (RX_DMA_BURST << RxCfgDMAShift),
+        0xff7e5880,
+        Jumbo_Frame_9k),
+
+     _R("RTL8168M/8111M",
+        CFG_METHOD_37,
+        RxCfg_128_int_en | RxEarly_off_V2 | (RX_DMA_BURST << RxCfgDMAShift),
+        0xff7e5880,
+        Jumbo_Frame_9k),
+
     _R("Unknown",
        CFG_METHOD_DEFAULT,
        (RX_DMA_BURST << RxCfgDMAShift),
@@ -288,6 +348,9 @@ const struct RTLChipInfo rtl_chip_info[] = {
 
 static struct pci_device_id rtl8168_pci_tbl[] = {
     { PCI_DEVICE(PCI_VENDOR_ID_REALTEK, 0x8168), },
+    { PCI_DEVICE(PCI_VENDOR_ID_REALTEK, 0x8161), },
+    { PCI_DEVICE(PCI_VENDOR_ID_REALTEK, 0x2502), },
+    { PCI_DEVICE(PCI_VENDOR_ID_REALTEK, 0x2600), },
     { PCI_VENDOR_ID_DLINK, 0x4300, 0x1186, 0x4b10,},
     {0,},
 };
@@ -1404,6 +1467,16 @@ rtl8168_disable_rxdvgate(struct net_device *dev)
         case CFG_METHOD_25:
         case CFG_METHOD_26:
         case CFG_METHOD_27:
+        case CFG_METHOD_28:
+        case CFG_MTEHOD_29:
+        case CFG_METHOD_30:
+        case CFG_METHOD_31:
+        case CFG_METHOD_32:
+        case CFG_METHOD_33:
+        case CFG_METHOD_34:
+        case CFG_METHOD_35:
+        case CFG_METHOD_36:
+        case CFG_METHOD_37:
             RTL_W8(0xF2, RTL_R8(0xF2) & ~BIT_3);
             mdelay(2);
             break;
@@ -1425,6 +1498,16 @@ rtl8168_wait_txrx_fifo_empty(struct net_device *dev)
         case CFG_METHOD_25:
         case CFG_METHOD_26:
         case CFG_METHOD_27:
+        case CFG_METHOD_28:
+        case CFG_MTEHOD_29:
+        case CFG_METHOD_30:
+        case CFG_METHOD_31:
+        case CFG_METHOD_32:
+        case CFG_METHOD_33:
+        case CFG_METHOD_34:
+        case CFG_METHOD_35:
+        case CFG_METHOD_36:
+        case CFG_METHOD_37:
             for (i = 0; i < 10; i++) {
                 udelay(100);
                 if (RTL_R32(TxConfig) & BIT_11)
@@ -1492,6 +1575,16 @@ rtl8168_nic_reset(struct net_device *dev)
         case CFG_METHOD_25:
         case CFG_METHOD_26:
         case CFG_METHOD_27:
+        case CFG_METHOD_28:
+        case CFG_MTEHOD_29:
+        case CFG_METHOD_30:
+        case CFG_METHOD_31:
+        case CFG_METHOD_32:
+        case CFG_METHOD_33:
+        case CFG_METHOD_34:
+        case CFG_METHOD_35:
+        case CFG_METHOD_36:
+        case CFG_METHOD_37:
             mdelay(2);
             break;
         default:
@@ -1931,6 +2024,16 @@ rtl8168_disable_pci_offset_99(struct rtl8168_private *tp)
         case CFG_METHOD_25:
         case CFG_METHOD_26:
         case CFG_METHOD_27:
+        case CFG_METHOD_28:
+        case CFG_METHOD_29:
+        case CFG_METHOD_30:
+        case CFG_METHOD_31:
+        case CFG_METHOD_32:
+        case CFG_METHOD_33:
+        case CFG_METHOD_34:
+        case CFG_METHOD_35:
+        case CFG_METHOD_36:
+        case CFG_METHOD_37:
             csi_tmp = rtl8168_eri_read(ioaddr, 0x3F2, 2, ERIAR_ExGMAC);
             csi_tmp &= ~(BIT_0 | BIT_1);
             rtl8168_eri_write(ioaddr, 0x3F2, 2, csi_tmp, ERIAR_ExGMAC);
@@ -1941,6 +2044,17 @@ rtl8168_disable_pci_offset_99(struct rtl8168_private *tp)
         case CFG_METHOD_21:
         case CFG_METHOD_22:
         case CFG_METHOD_26:
+        case CFG_METHOD_27:
+        case CFG_METHOD_28:
+        case CFG_METHOD_29:
+        case CFG_METHOD_30:
+        case CFG_METHOD_31:
+        case CFG_METHOD_32:
+        case CFG_METHOD_33:
+        case CFG_METHOD_34:
+        case CFG_METHOD_35:
+        case CFG_METHOD_36:
+        case CFG_METHOD_37:
             rtl8168_csi_fun0_write_byte(tp, 0x99, 0x00);
             break;
     }
@@ -1952,8 +2066,8 @@ static void
 rtl8168_enable_pci_offset_99(struct rtl8168_private *tp)
 {
     void __iomem *ioaddr = tp->mmio_addr;
-    u32 csi_tmp;
-    
+    u32 csi_tmp = 0;
+
     switch (tp->mcfg) {
         case CFG_METHOD_21:
         case CFG_METHOD_22:
@@ -1962,6 +2076,16 @@ rtl8168_enable_pci_offset_99(struct rtl8168_private *tp)
         case CFG_METHOD_25:
         case CFG_METHOD_26:
         case CFG_METHOD_27:
+        case CFG_METHOD_28:
+        case CFG_METHOD_29:
+        case CFG_METHOD_30:
+        case CFG_METHOD_31:
+        case CFG_METHOD_32:
+        case CFG_METHOD_33:
+        case CFG_METHOD_34:
+        case CFG_METHOD_35:
+        case CFG_METHOD_36:
+        case CFG_METHOD_37:
             csi_tmp = rtl8168_eri_read(ioaddr, 0x3F2, 2, ERIAR_ExGMAC);
             csi_tmp &= ~(BIT_0 | BIT_1);
             if (!(tp->org_pci_offset_99 & (BIT_5 | BIT_6)))
@@ -1994,6 +2118,16 @@ void rtl8168_init_pci_offset_99(struct rtl8168_private *tp)
         case CFG_METHOD_25:
         case CFG_METHOD_26:
         case CFG_METHOD_27:
+        case CFG_METHOD_28:
+        case CFG_METHOD_29:
+        case CFG_METHOD_30:
+        case CFG_METHOD_31:
+        case CFG_METHOD_32:
+        case CFG_METHOD_33:
+        case CFG_METHOD_34:
+        case CFG_METHOD_35:
+        case CFG_METHOD_36:
+        case CFG_METHOD_37:
             csi_tmp = rtl8168_eri_read(ioaddr, 0x3F2, 2, ERIAR_ExGMAC);
             csi_tmp &= ~( BIT_8 | BIT_9  | BIT_10 | BIT_11  | BIT_12  | BIT_13  | BIT_14 | BIT_15 );
             csi_tmp |= ( BIT_9 | BIT_10 | BIT_13  | BIT_14 | BIT_15 );
@@ -2040,12 +2174,64 @@ void rtl8168_init_pci_offset_99(struct rtl8168_private *tp)
             rtl8168_eri_write(ioaddr, 0x3FA, 2, csi_tmp, ERIAR_ExGMAC);
             
             break;
+        case CFG_METHOD_29:
+        case CFG_METHOD_30:
+        case CFG_METHOD_31:
+        case CFG_METHOD_32:
+        case CFG_METHOD_33:
+        case CFG_METHOD_34:
+        case CFG_METHOD_35:
+        case CFG_METHOD_36:
+        case CFG_METHOD_37:
+                if (tp->org_pci_offset_99 & BIT_2)
+                        rtl8168_mac_ocp_write(tp, 0xE0A2, rtl8168_mac_ocp_read(tp, 0xE0A2) | BIT_0);
+                break;
+        }
+
+        switch (tp->mcfg) {
+        case CFG_METHOD_23:
+                rtl8168_eri_write(tp, 0x2E8, 2, 0x883C, ERIAR_ExGMAC);
+                rtl8168_eri_write(tp, 0x2EA, 2, 0x8C12, ERIAR_ExGMAC);
+                rtl8168_eri_write(tp, 0x2EC, 2, 0x9003, ERIAR_ExGMAC);
+                rtl8168_eri_write(tp, 0x2E2, 2, 0x883C, ERIAR_ExGMAC);
+                rtl8168_eri_write(tp, 0x2E4, 2, 0x8C12, ERIAR_ExGMAC);
+                rtl8168_eri_write(tp, 0x2E6, 2, 0x9003, ERIAR_ExGMAC);
+                break;
+        case CFG_METHOD_21:
+        case CFG_METHOD_22:
+        case CFG_METHOD_24:
+        case CFG_METHOD_25:
+        case CFG_METHOD_26:
+        case CFG_METHOD_27:
+        case CFG_METHOD_28:
+        case CFG_METHOD_29:
+        case CFG_METHOD_30:
+        case CFG_METHOD_31:
+        case CFG_METHOD_32:
+        case CFG_METHOD_33:
+        case CFG_METHOD_34:
+        case CFG_METHOD_35:
+        case CFG_METHOD_36:
+        case CFG_METHOD_37:
+                rtl8168_eri_write(tp, 0x2E8, 2, 0x9003, ERIAR_ExGMAC);
+                rtl8168_eri_write(tp, 0x2EA, 2, 0x9003, ERIAR_ExGMAC);
+                rtl8168_eri_write(tp, 0x2EC, 2, 0x9003, ERIAR_ExGMAC);
+                rtl8168_eri_write(tp, 0x2E2, 2, 0x883C, ERIAR_ExGMAC);
+                rtl8168_eri_write(tp, 0x2E4, 2, 0x8C12, ERIAR_ExGMAC);
+                rtl8168_eri_write(tp, 0x2E6, 2, 0x9003, ERIAR_ExGMAC);
+                break;
+
     }
     
     rtl8168_enable_pci_offset_99(tp);
     
     switch (tp->mcfg) {
         case CFG_METHOD_26:
+        case CFG_METHOD_29:
+        case CFG_METHOD_30:
+        case CFG_METHOD_35:
+        case CFG_METHOD_36:
+        case CFG_METHOD_37:
             RTL_W8(0xB6, RTL_R8(0xB6) | BIT_0);
             break;
     }
@@ -2061,6 +2247,16 @@ void rtl8168_disable_pci_offset_180(struct rtl8168_private *tp)
         case CFG_METHOD_25:
         case CFG_METHOD_26:
         case CFG_METHOD_27:
+        case CFG_METHOD_28:
+        case CFG_METHOD_29:
+        case CFG_METHOD_30:
+        case CFG_METHOD_31:
+        case CFG_METHOD_32:
+        case CFG_METHOD_33:
+        case CFG_METHOD_34:
+        case CFG_METHOD_35:
+        case CFG_METHOD_36:
+        case CFG_METHOD_37:
             csi_tmp = rtl8168_eri_read(ioaddr, 0x1E2, 1, ERIAR_ExGMAC);
             csi_tmp &= ~BIT_2;
             rtl8168_eri_write(ioaddr, 0x1E2, 1, csi_tmp, ERIAR_ExGMAC);
@@ -2078,13 +2274,60 @@ static void
 rtl8168_enable_pci_offset_180(struct rtl8168_private *tp)
 {
     void __iomem *ioaddr = tp->mmio_addr;
-    u32 csi_tmp;
+    u32 csi_tmp = 0;
     
+    switch (tp->mcfg) {
+        case CFG_METHOD_25:
+        case CFG_METHOD_28:
+                csi_tmp = rtl8168_eri_read(tp, 0x1E8, 4, ERIAR_ExGMAC);
+                csi_tmp &= ~(0x0000FF00);
+                csi_tmp |= (0x00006400);
+                rtl8168_eri_write(tp, 0x1E8, 4, csi_tmp, ERIAR_ExGMAC);
+
+                csi_tmp = rtl8168_eri_read(tp, 0x1E4, 4, ERIAR_ExGMAC);
+                csi_tmp &= ~(0x0000FF00);
+                rtl8168_eri_write(tp, 0x1E4, 4, csi_tmp, ERIAR_ExGMAC);
+                break;
+        case CFG_METHOD_31:
+        case CFG_METHOD_32:
+        case CFG_METHOD_33:
+        case CFG_METHOD_34:
+                csi_tmp = rtl8168_eri_read(tp, 0x1E8, 4, ERIAR_ExGMAC);
+                csi_tmp &= ~(0x0000FFF0);
+                csi_tmp |= (0x00000640);
+                rtl8168_eri_write(tp, 0x1E8, 4, csi_tmp, ERIAR_ExGMAC);
+
+                csi_tmp = rtl8168_eri_read(tp, 0x1E4, 4, ERIAR_ExGMAC);
+                csi_tmp &= ~(0x0000FF00);
+                rtl8168_eri_write(tp, 0x1E4, 4, csi_tmp, ERIAR_ExGMAC);
+                break;
+    }
+
+    switch (tp->mcfg) {
+        case CFG_METHOD_35:
+        case CFG_METHOD_36:
+                csi_tmp = rtl8168_eri_read(tp, 0x1E8, 2, ERIAR_ExGMAC);
+                csi_tmp &= ~(0xFFF0);
+                csi_tmp |= 0x0640;
+                rtl8168_eri_write(tp,0x1E8, 2, csi_tmp, ERIAR_ExGMAC);
+
+                csi_tmp = rtl8168_eri_read(tp, 0x1E4, 2, ERIAR_ExGMAC);
+                csi_tmp &= ~(0xFF00);
+                rtl8168_eri_write(tp, 0x1E4, 2, csi_tmp, ERIAR_ExGMAC);
+                break;
+    }
+
     switch (tp->mcfg) {
         case CFG_METHOD_24:
         case CFG_METHOD_25:
         case CFG_METHOD_26:
         case CFG_METHOD_27:
+        case CFG_METHOD_28:
+        case CFG_METHOD_29:
+        case CFG_METHOD_30:
+        case CFG_METHOD_35:
+        case CFG_METHOD_36:
+        case CFG_METHOD_37:
             csi_tmp = rtl8168_eri_read(ioaddr, 0x1E2, 1, ERIAR_ExGMAC);
             csi_tmp &= ~BIT_2;
             if (tp->org_pci_offset_180 & (BIT_0|BIT_1))
@@ -2122,6 +2365,16 @@ rtl8168_set_pci_99_180_exit_driver_para(struct net_device *dev)
         case CFG_METHOD_24:
         case CFG_METHOD_25:
         case CFG_METHOD_27:
+        case CFG_METHOD_28:
+        case CFG_METHOD_29:
+        case CFG_METHOD_30:
+        case CFG_METHOD_31:
+        case CFG_METHOD_32:
+        case CFG_METHOD_33:
+        case CFG_METHOD_34:
+        case CFG_METHOD_35:
+        case CFG_METHOD_36:
+        case CFG_METHOD_37:
             rtl8168_issue_offset_99_event(tp);
             break;
     }
@@ -2134,6 +2387,16 @@ rtl8168_set_pci_99_180_exit_driver_para(struct net_device *dev)
         case CFG_METHOD_25:
         case CFG_METHOD_26:
         case CFG_METHOD_27:
+        case CFG_METHOD_28:
+        case CFG_METHOD_29:
+        case CFG_METHOD_30:
+        case CFG_METHOD_31:
+        case CFG_METHOD_32:
+        case CFG_METHOD_33:
+        case CFG_METHOD_34:
+        case CFG_METHOD_35:
+        case CFG_METHOD_36:
+        case CFG_METHOD_37:
             rtl8168_disable_pci_offset_99(tp);
             break;
     }
@@ -2142,9 +2405,226 @@ rtl8168_set_pci_99_180_exit_driver_para(struct net_device *dev)
         case CFG_METHOD_25:
         case CFG_METHOD_26:
         case CFG_METHOD_27:
+        case CFG_METHOD_28:
+        case CFG_METHOD_29:
+        case CFG_METHOD_30:
+        case CFG_METHOD_31:
+        case CFG_METHOD_32:
+        case CFG_METHOD_33:
+        case CFG_METHOD_34:
+        case CFG_METHOD_35:
+        case CFG_METHOD_36:
+        case CFG_METHOD_37:
             rtl8168_disable_pci_offset_180(tp);
             break;
     }
+}
+
+static void
+rtl8168_disable_exit_l1_mask(struct rtl8168_private *tp)
+{
+        u32 csi_tmp;
+
+        switch (tp->mcfg) {
+        case CFG_METHOD_16:
+        case CFG_METHOD_17:
+        case CFG_METHOD_18:
+        case CFG_METHOD_19:
+                csi_tmp = rtl8168_eri_read(tp, 0xD4, 4, ERIAR_ExGMAC);
+                csi_tmp &= ~(BIT_8 | BIT_9 | BIT_10 | BIT_11 | BIT_12);
+                rtl8168_eri_write(tp, 0xD4, 4, csi_tmp, ERIAR_ExGMAC);
+                break;
+        case CFG_METHOD_20:
+                csi_tmp = rtl8168_eri_read(tp, 0xD4, 4, ERIAR_ExGMAC);
+                csi_tmp &= ~(BIT_10 | BIT_11);
+                rtl8168_eri_write(tp, 0xD4, 4, csi_tmp, ERIAR_ExGMAC);
+                break;
+        case CFG_METHOD_21:
+        case CFG_METHOD_22:
+        case CFG_METHOD_23:
+        case CFG_METHOD_24:
+        case CFG_METHOD_25:
+        case CFG_METHOD_26:
+        case CFG_METHOD_27:
+        case CFG_METHOD_28:
+        case CFG_METHOD_29:
+        case CFG_METHOD_30:
+        case CFG_METHOD_31:
+        case CFG_METHOD_32:
+        case CFG_METHOD_33:
+        case CFG_METHOD_34:
+        case CFG_METHOD_35:
+        case CFG_METHOD_36:
+        case CFG_METHOD_37:
+                csi_tmp = rtl8168_eri_read(tp, 0xD4, 4, ERIAR_ExGMAC);
+                csi_tmp &= ~(BIT_7 | BIT_8 | BIT_9 | BIT_10 | BIT_11 | BIT_12);
+                rtl8168_eri_write(tp, 0xD4, 4, csi_tmp, ERIAR_ExGMAC);
+                break;
+        }
+}
+
+static void ClearAndSetEthPhyBit(struct rtl8168_private *tp, u8  addr, u16 clearmask, u16 setmask)
+{
+        u16 PhyRegValue;
+
+        PhyRegValue = rtl8168_mdio_read(tp, addr);
+        PhyRegValue &= ~clearmask;
+        PhyRegValue |= setmask;
+        rtl8168_mdio_write(tp, addr, PhyRegValue);
+}
+
+static void mdio_real_write(struct rtl8168_private *tp,
+                            u32 RegAddr,
+                            u32 value)
+{
+        int i;
+
+        if (RegAddr == 0x1F) {
+                tp->cur_page = value;
+        }
+
+        if (tp->mcfg == CFG_METHOD_11) {
+                RTL_W32(tp, OCPDR, OCPDR_Write |
+                        (RegAddr & OCPDR_Reg_Mask) << OCPDR_GPHY_Reg_shift |
+                        (value & OCPDR_Data_Mask));
+                RTL_W32(tp, OCPAR, OCPAR_GPHY_Write);
+                RTL_W32(tp, EPHY_RXER_NUM, 0);
+
+                for (i = 0; i < 100; i++) {
+                        mdelay(1);
+                        if (!(RTL_R32(tp, OCPAR) & OCPAR_Flag))
+                                break;
+                }
+        } else {
+                if (tp->HwSuppPhyOcpVer > 0) {
+                        if (RegAddr == 0x1F) {
+                                return;
+                        }
+                        rtl8168_mdio_real_write_phy_ocp(tp, tp->cur_page, RegAddr, value);
+                } else {
+                        if (tp->mcfg == CFG_METHOD_12 || tp->mcfg == CFG_METHOD_13)
+                                RTL_W32(tp, 0xD0, RTL_R32(tp, 0xD0) & ~0x00020000);
+
+                        RTL_W32(tp, PHYAR, PHYAR_Write |
+                                (RegAddr & PHYAR_Reg_Mask) << PHYAR_Reg_shift |
+                                (value & PHYAR_Data_Mask));
+
+                        for (i = 0; i < R8168_CHANNEL_WAIT_COUNT; i++) {
+                                udelay(R8168_CHANNEL_WAIT_TIME);
+
+                                /* Check if the RTL8168 has completed writing to the specified MII register */
+                                if (!(RTL_R32(tp, PHYAR) & PHYAR_Flag)) {
+                                        udelay(R8168_CHANNEL_EXIT_DELAY_TIME);
+                                        break;
+                                }
+                        }
+
+                        if (tp->mcfg == CFG_METHOD_12 || tp->mcfg == CFG_METHOD_13)
+                                RTL_W32(tp, 0xD0, RTL_R32(tp, 0xD0) | 0x00020000);
+                }
+        }
+}
+
+void rtl8168_mdio_write(struct rtl8168_private *tp,
+                        u16 RegAddr,
+                        u16 value)
+{
+        if (tp->rtk_enable_diag)
+                return;
+
+        mdio_real_write(tp, RegAddr, value);
+}
+
+void rtl8168_mdio_prot_write(struct rtl8168_private *tp,
+                             u32 RegAddr,
+                             u32 value)
+{
+        mdio_real_write(tp, RegAddr, value);
+}
+
+void rtl8168_mdio_prot_direct_write_phy_ocp(struct rtl8168_private *tp,
+                u32 RegAddr,
+                u32 value)
+{
+        mdio_real_direct_write_phy_ocp(tp, RegAddr, value);
+}
+
+void rtl8168_set_eth_phy_bit(struct rtl8168_private *tp, u8  addr, u16  mask)
+{
+        ClearAndSetEthPhyBit(tp,
+                             addr,
+                             0,
+                             mask
+                            );
+}
+
+static int
+rtl8168_set_phy_mcu_patch_request(struct rtl8168_private *tp)
+{
+        u16 PhyRegValue;
+        u32 WaitCnt;
+        int retval = TRUE;
+
+        switch (tp->mcfg) {
+        case CFG_METHOD_21:
+        case CFG_METHOD_22:
+        case CFG_METHOD_23:
+        case CFG_METHOD_24:
+        case CFG_METHOD_25:
+        case CFG_METHOD_26:
+        case CFG_METHOD_27:
+        case CFG_METHOD_28:
+        case CFG_METHOD_29:
+        case CFG_METHOD_30:
+        case CFG_METHOD_31:
+        case CFG_METHOD_32:
+        case CFG_METHOD_33:
+        case CFG_METHOD_34:
+        case CFG_METHOD_35:
+        case CFG_METHOD_36:
+        case CFG_METHOD_37:
+                rtl8168_mdio_write(tp,0x1f, 0x0B82);
+                rtl8168_set_eth_phy_bit(tp, 0x10, BIT_4);
+
+                rtl8168_mdio_write(tp,0x1f, 0x0B80);
+                WaitCnt = 0;
+                do {
+                        PhyRegValue = rtl8168_mdio_read(tp, 0x10);
+                        udelay(100);
+                        WaitCnt++;
+                }  while (!(PhyRegValue & BIT_6) && (WaitCnt < 1000));
+
+                if (!(PhyRegValue & BIT_6) && (WaitCnt == 1000))
+                        retval = FALSE;
+
+                rtl8168_mdio_write(tp,0x1f, 0x0000);
+                break;
+        }
+
+        return retval;
+}
+
+static void
+rtl8168_disable_ocp_phy_power_saving(struct net_device *dev)
+{
+        struct rtl8168_private *tp = netdev_priv(dev);
+        u16 val;
+
+        if (tp->mcfg == CFG_METHOD_25 || tp->mcfg == CFG_METHOD_26 ||
+            tp->mcfg == CFG_METHOD_27 || tp->mcfg == CFG_METHOD_28 ||
+            tp->mcfg == CFG_METHOD_29 || tp->mcfg == CFG_METHOD_30 ||
+            tp->mcfg == CFG_METHOD_31 || tp->mcfg == CFG_METHOD_32 ||
+            tp->mcfg == CFG_METHOD_33 || tp->mcfg == CFG_METHOD_34 ||
+            tp->mcfg == CFG_METHOD_35 || tp->mcfg == CFG_METHOD_36 ||
+            tp->mcfg == CFG_METHOD_37) {
+                val = rtl8168_mdio_read_phy_ocp(tp, 0x0C41, 0x13);
+                if (val != 0x0500) {
+                        rtl8168_set_phy_mcu_patch_request(tp);
+                        rtl8168_mdio_write_phy_ocp(tp, 0x0C41, 0x13, 0x0000);
+                        rtl8168_mdio_write_phy_ocp(tp, 0x0C41, 0x13, 0x0500);
+                        rtl8168_clear_phy_mcu_patch_request(tp);
+                }
+        }
 }
 
 void
@@ -2171,6 +2651,16 @@ rtl8168_hw_d3_para(struct net_device *dev)
         case CFG_METHOD_25:
         case CFG_METHOD_26:
         case CFG_METHOD_27:
+        case CFG_METHOD_28:
+        case CFG_METHOD_29:
+        case CFG_METHOD_30:
+        case CFG_METHOD_31:
+        case CFG_METHOD_32:
+        case CFG_METHOD_33:
+        case CFG_METHOD_34:
+        case CFG_METHOD_35:
+        case CFG_METHOD_36:
+        case CFG_METHOD_37:
             RTL_W8(0xF1, RTL_R8(0xF1) & ~BIT_7);
             RTL_W8(Cfg9346, Cfg9346_Unlock);
             RTL_W8(Config2, RTL_R8(Config2) & ~BIT_7);
@@ -2178,11 +2668,34 @@ rtl8168_hw_d3_para(struct net_device *dev)
             RTL_W8(Cfg9346, Cfg9346_Lock);
             break;
     }
-    
+
+    if (tp->HwSuppAspmClkIntrLock) {
+            RTL_W8(tp, 0xF1, RTL_R8(tp, 0xF1) & ~BIT_7);
+            rtl8168_enable_cfg9346_write(tp);
+            rtl8168_hw_aspm_clkreq_enable(tp, false); 
+            rtl8168_disable_cfg9346_write(tp);
+    }
+
+    rtl8168_disable_exit_l1_mask(tp);
+
+#ifdef ENABLE_REALWOW_SUPPORT
+    rtl8168_set_realwow_d3_para(dev);
+#endif
+  
+    rtl8168_set_rx_q_num(tp, 1);
+
+    if (tp->mcfg == CFG_METHOD_18 || tp->mcfg == CFG_METHOD_19 || tp->mcfg == CFG_METHOD_20) {
+          rtl8168_eri_write(tp, 0x1bc, 4, 0x0000001f, ERIAR_ExGMAC);
+          rtl8168_eri_write(tp, 0x1dc, 4, 0x0000002d, ERIAR_ExGMAC);
+    } else if (tp->mcfg == CFG_METHOD_16) {
+          rtl8168_eri_write(tp, 0x1bc, 4, 0x0000001f, ERIAR_ExGMAC);
+          rtl8168_eri_write(tp, 0x1dc, 4, 0x0000003f, ERIAR_ExGMAC);
+    }
+
     if (tp->mcfg == CFG_METHOD_21 || tp->mcfg == CFG_METHOD_22 ||
         tp->mcfg == CFG_METHOD_23 || tp->mcfg == CFG_METHOD_24 ||
         tp->mcfg == CFG_METHOD_25 || tp->mcfg == CFG_METHOD_26 ||
-        tp->mcfg == CFG_METHOD_27) {
+        tp->mcfg == CFG_METHOD_27 || tp->mcfg == CFG_METHOD_28) {
         rtl8168_eri_write(ioaddr, 0x2F8, 2, 0x0064, ERIAR_ExGMAC);
     }
     
@@ -2215,7 +2728,14 @@ rtl8168_hw_d3_para(struct net_device *dev)
     rtl8168_set_pci_99_180_exit_driver_para(dev);
     
     /*disable ocp phy power saving*/
-    if (tp->mcfg == CFG_METHOD_25 || tp->mcfg == CFG_METHOD_26 || tp->mcfg == CFG_METHOD_27) {
+      if (tp->mcfg == CFG_METHOD_25 || tp->mcfg == CFG_METHOD_26 ||
+          tp->mcfg == CFG_METHOD_27 || tp->mcfg == CFG_METHOD_28 ||
+          tp->mcfg == CFG_METHOD_29 || tp->mcfg == CFG_METHOD_30 ||
+          tp->mcfg == CFG_METHOD_31 || tp->mcfg == CFG_METHOD_32 ||
+          tp->mcfg == CFG_METHOD_33 || tp->mcfg == CFG_METHOD_34 ||
+          tp->mcfg == CFG_METHOD_35 || tp->mcfg == CFG_METHOD_36 ||
+          tp->mcfg == CFG_METHOD_37)
+      {
         spin_lock_irqsave(&tp->phy_lock, flags);
         mdio_write(tp, 0x1F, 0x0C41);
         mdio_write(tp, 0x13, 0x0000);
@@ -2229,7 +2749,9 @@ rtl8168_hw_d3_para(struct net_device *dev)
 
 #endif  /* DISABLED_CODE */
 
+#ifndef WAKE_ANY
 #define WAKE_ANY (WAKE_PHY | WAKE_MAGIC | WAKE_UCAST | WAKE_BCAST | WAKE_MCAST)
+#endif /* WAKE_ANY */
 
 void rtl8168_get_hw_wol(struct net_device *dev)
 {
@@ -2262,6 +2784,17 @@ void rtl8168_get_hw_wol(struct net_device *dev)
         case CFG_METHOD_24:
         case CFG_METHOD_25:
         case CFG_METHOD_26:
+        case CFG_METHOD_27:
+        case CFG_METHOD_28:
+        case CFG_METHOD_29:
+        case CFG_METHOD_30:
+        case CFG_METHOD_31:
+        case CFG_METHOD_32:
+        case CFG_METHOD_33:
+        case CFG_METHOD_34:
+        case CFG_METHOD_35:
+        case CFG_METHOD_36:
+        case CFG_METHOD_37:
             csi_tmp = rtl8168_eri_read(ioaddr, 0xDE, 1, ERIAR_ExGMAC);
             if (csi_tmp & BIT_0)
                 tp->wol_opts |= WAKE_MAGIC;
@@ -2320,6 +2853,17 @@ rtl8168_set_hw_wol(struct net_device *dev, u32 wolopts)
         case CFG_METHOD_24:
         case CFG_METHOD_25:
         case CFG_METHOD_26:
+        case CFG_METHOD_27:
+        case CFG_METHOD_28:
+        case CFG_METHOD_29:
+        case CFG_METHOD_30:
+        case CFG_METHOD_31:
+        case CFG_METHOD_32:
+        case CFG_METHOD_33:
+        case CFG_METHOD_34:
+        case CFG_METHOD_35:
+        case CFG_METHOD_36:
+        case CFG_METHOD_37:
             tmp = ARRAY_SIZE(cfg) - 1;
             
             csi_tmp = rtl8168_eri_read(ioaddr, 0xDE, 1, ERIAR_ExGMAC);
@@ -2357,14 +2901,19 @@ rtl8168_powerdown_pll(struct net_device *dev)
         //unsigned long flags;
         
         rtl8168_set_hw_wol(dev, tp->wol_opts);
-        
+
         if (tp->mcfg == CFG_METHOD_16 || tp->mcfg == CFG_METHOD_17 ||
             tp->mcfg == CFG_METHOD_21 || tp->mcfg == CFG_METHOD_22 ||
             tp->mcfg == CFG_METHOD_24 || tp->mcfg == CFG_METHOD_25 ||
-            tp->mcfg == CFG_METHOD_26) {
-            RTL_W8(Cfg9346, Cfg9346_Unlock);
-            RTL_W8(Config2, RTL_R8(Config2) | PMSTS_En);
-            RTL_W8(Cfg9346, Cfg9346_Lock);
+            tp->mcfg == CFG_METHOD_26 || tp->mcfg == CFG_METHOD_23 ||
+            tp->mcfg == CFG_METHOD_27 || tp->mcfg == CFG_METHOD_28 ||
+            tp->mcfg == CFG_METHOD_29 || tp->mcfg == CFG_METHOD_30 ||
+            tp->mcfg == CFG_METHOD_31 || tp->mcfg == CFG_METHOD_32 ||
+            tp->mcfg == CFG_METHOD_33 || tp->mcfg == CFG_METHOD_34 ||
+            tp->mcfg == CFG_METHOD_35 || tp->mcfg == CFG_METHOD_36) {
+                RTL_W8(Cfg9346, Cfg9346_Unlock);
+                RTL_W8(Config2, RTL_R8(Config2) | PMSTS_En);
+                RTL_W8(Cfg9346, Cfg9346_Lock);
         }
         
         spin_lock_irqsave(&tp->phy_lock, flags);
@@ -2416,7 +2965,7 @@ rtl8168_powerdown_pll(struct net_device *dev)
     switch (tp->mcfg) {
         case CFG_METHOD_9:
         case CFG_METHOD_10:
-        case CFG_METHOD_11:
+        //case CFG_METHOD_11:
         case CFG_METHOD_12:
         case CFG_METHOD_13:
         case CFG_METHOD_14:
@@ -2429,8 +2978,49 @@ rtl8168_powerdown_pll(struct net_device *dev)
         case CFG_METHOD_24:
         case CFG_METHOD_25:
         case CFG_METHOD_26:
+        case CFG_METHOD_27:
+        case CFG_METHOD_28:
+        case CFG_METHOD_29:
+        case CFG_METHOD_30:
+        case CFG_METHOD_31:
+        case CFG_METHOD_32:
+        case CFG_METHOD_33:
+        case CFG_METHOD_34:
+        case CFG_METHOD_35:
+        case CFG_METHOD_36:
             RTL_W8(PMCH, RTL_R8(PMCH) & ~BIT_7);
             break;
+    }
+
+    switch (tp->mcfg) {
+        case CFG_METHOD_14:
+        case CFG_METHOD_15:
+                RTL_W8(tp, 0xD0, RTL_R8(tp, 0xD0) & ~BIT_6);
+                break;
+        case CFG_METHOD_16:
+        case CFG_METHOD_17:
+        case CFG_METHOD_18:
+        case CFG_METHOD_19:
+        case CFG_METHOD_20:
+        case CFG_METHOD_21:
+        case CFG_METHOD_22:
+        case CFG_METHOD_23:
+        case CFG_METHOD_24:
+        case CFG_METHOD_25:
+        case CFG_METHOD_26:
+        case CFG_METHOD_27:
+        case CFG_METHOD_28:
+        case CFG_METHOD_29:
+        case CFG_METHOD_30:
+        case CFG_METHOD_31:
+        case CFG_METHOD_32:
+        case CFG_METHOD_33:
+        case CFG_METHOD_34:
+        case CFG_METHOD_35:
+        case CFG_METHOD_36:
+                RTL_W8(tp, 0xD0, RTL_R8(tp, 0xD0) & ~BIT_6);
+                RTL_W8(tp, 0xF2, RTL_R8(tp, 0xF2) & ~BIT_6);
+                break;
     }
 }
 
@@ -2456,6 +3046,16 @@ void rtl8168_powerup_pll(struct net_device *dev)
         case CFG_METHOD_24:
         case CFG_METHOD_25:
         case CFG_METHOD_26:
+        case CFG_METHOD_27:
+        case CFG_METHOD_28:
+        case CFG_METHOD_29:
+        case CFG_METHOD_30:
+        case CFG_METHOD_31:
+        case CFG_METHOD_32:
+        case CFG_METHOD_33:
+        case CFG_METHOD_34:
+        case CFG_METHOD_35:
+        case CFG_METHOD_36:
             RTL_W8(PMCH, RTL_R8(PMCH) | BIT_7 | BIT_6);
             break;
     }
@@ -2610,6 +3210,7 @@ rtl8168_set_speed_xmii(struct net_device *dev,
 #ifndef BMCR_SPEED10
 #define BMCR_SPEED10    0x0000
 #endif
+
         if ((speed == SPEED_10) && (duplex == DUPLEX_HALF)) {
             bmcr_true_force = BMCR_SPEED10;
         } else if ((speed == SPEED_10) && (duplex == DUPLEX_FULL)) {
@@ -2970,8 +3571,6 @@ void rtl8168_gset_xmii(struct net_device *dev,
     
     cmd->duplex = ((status & _1000bpsF) || (status & FullDup)) ?
     DUPLEX_FULL : DUPLEX_HALF;
-    
-    
 }
 
 #if DISABLED_CODE
@@ -3384,6 +3983,15 @@ static int rtl8168_enable_EEE(struct rtl8168_private *tp)
         case CFG_METHOD_25:
         case CFG_METHOD_26:
         case CFG_METHOD_27:
+        case CFG_METHOD_28:
+        case CFG_METHOD_29:
+        case CFG_METHOD_30:
+        case CFG_METHOD_31:
+        case CFG_METHOD_32:
+        case CFG_METHOD_33:
+        case CFG_METHOD_34:
+        case CFG_METHOD_35:
+        case CFG_METHOD_36:
             spin_lock_irqsave(&tp->phy_lock, flags);
             data = rtl8168_eri_read(ioaddr, 0x1B0, 4, ERIAR_ExGMAC);
             data |= BIT_1 | BIT_0;
@@ -14275,6 +14883,1515 @@ rtl8168_hw_phy_config(struct net_device *dev)
                 mdio_write(tp, 0x0D, gphy_val | 0x006B);
                 mdio_write(tp, 0x0D, gphy_val | 0x006C);
             }
+        } else if (tp->mcfg == CFG_METHOD_11) {
+                rtl8168_mdio_write(tp, 0x1F, 0x0002);
+                rtl8168_mdio_write(tp, 0x10, 0x0008);
+                rtl8168_mdio_write(tp, 0x0D, 0x006C);
+
+                rtl8168_mdio_write(tp, 0x1F, 0x0001);
+                rtl8168_mdio_write(tp, 0x17, 0x0CC0);
+
+                rtl8168_mdio_write(tp, 0x1F, 0x0001);
+                rtl8168_mdio_write(tp, 0x0B, 0xA4D8);
+                rtl8168_mdio_write(tp, 0x09, 0x281C);
+                rtl8168_mdio_write(tp, 0x07, 0x2883);
+                rtl8168_mdio_write(tp, 0x0A, 0x6B35);
+                rtl8168_mdio_write(tp, 0x1D, 0x3DA4);
+                rtl8168_mdio_write(tp, 0x1C, 0xEFFD);
+                rtl8168_mdio_write(tp, 0x14, 0x7F52);
+                rtl8168_mdio_write(tp, 0x18, 0x7FC6);
+                rtl8168_mdio_write(tp, 0x08, 0x0601);
+                rtl8168_mdio_write(tp, 0x06, 0x4063);
+                rtl8168_mdio_write(tp, 0x10, 0xF074);
+                rtl8168_mdio_write(tp, 0x1F, 0x0003);
+                rtl8168_mdio_write(tp, 0x13, 0x0789);
+                rtl8168_mdio_write(tp, 0x12, 0xF4BD);
+                rtl8168_mdio_write(tp, 0x1A, 0x04FD);
+                rtl8168_mdio_write(tp, 0x14, 0x84B0);
+                rtl8168_mdio_write(tp, 0x1F, 0x0000);
+                rtl8168_mdio_write(tp, 0x00, 0x9200);
+
+                rtl8168_mdio_write(tp, 0x1F, 0x0005);
+                rtl8168_mdio_write(tp, 0x01, 0x0340);
+                rtl8168_mdio_write(tp, 0x1F, 0x0001);
+                rtl8168_mdio_write(tp, 0x04, 0x4000);
+                rtl8168_mdio_write(tp, 0x03, 0x1D21);
+                rtl8168_mdio_write(tp, 0x02, 0x0C32);
+                rtl8168_mdio_write(tp, 0x01, 0x0200);
+                rtl8168_mdio_write(tp, 0x00, 0x5554);
+                rtl8168_mdio_write(tp, 0x04, 0x4800);
+                rtl8168_mdio_write(tp, 0x04, 0x4000);
+                rtl8168_mdio_write(tp, 0x04, 0xF000);
+                rtl8168_mdio_write(tp, 0x03, 0xDF01);
+                rtl8168_mdio_write(tp, 0x02, 0xDF20);
+                rtl8168_mdio_write(tp, 0x01, 0x101A);
+                rtl8168_mdio_write(tp, 0x00, 0xA0FF);
+                rtl8168_mdio_write(tp, 0x04, 0xF800);
+                rtl8168_mdio_write(tp, 0x04, 0xF000);
+                rtl8168_mdio_write(tp, 0x1F, 0x0000);
+
+                rtl8168_mdio_write(tp, 0x1F, 0x0007);
+                rtl8168_mdio_write(tp, 0x1E, 0x0023);
+                rtl8168_mdio_write(tp, 0x16, 0x0000);
+                rtl8168_mdio_write(tp, 0x1F, 0x0000);
+
+                gphy_val = rtl8168_mdio_read(tp, 0x0D);
+                gphy_val |= BIT_5;
+                rtl8168_mdio_write(tp, 0x0D, gphy_val);
+
+                rtl8168_mdio_write(tp, 0x1F, 0x0002);
+                gphy_val = rtl8168_mdio_read(tp, 0x0C);
+                gphy_val |= BIT_10;
+                rtl8168_mdio_write(tp, 0x0C, gphy_val);
+                rtl8168_mdio_write(tp, 0x1F, 0x0000);
+        } else if (tp->mcfg == CFG_METHOD_12) {
+                rtl8168_mdio_write(tp, 0x1F, 0x0001);
+                rtl8168_mdio_write(tp, 0x17, 0x0CC0);
+                rtl8168_mdio_write(tp, 0x1F, 0x0000);
+
+                rtl8168_mdio_write(tp, 0x1F, 0x0000);
+                gphy_val = rtl8168_mdio_read(tp, 0x0D);
+                gphy_val |= BIT_5;
+                rtl8168_mdio_write(tp, 0x0D, gphy_val);
+
+                rtl8168_mdio_write(tp, 0x1F, 0x0002);
+                gphy_val = rtl8168_mdio_read(tp, 0x0C);
+                gphy_val |= BIT_10;
+                rtl8168_mdio_write(tp, 0x0C, gphy_val);
+                rtl8168_mdio_write(tp, 0x1F, 0x0000);
+
+                rtl8168_mdio_write(tp, 0x1F, 0x0007);
+                rtl8168_mdio_write(tp, 0x1E, 0x002C);
+                rtl8168_mdio_write(tp, 0x15, 0x035D);
+                rtl8168_mdio_write(tp, 0x1F, 0x0005);
+                rtl8168_mdio_write(tp, 0x01, 0x0300);
+                rtl8168_mdio_write(tp, 0x1F, 0x0000);
+        } else if (tp->mcfg == CFG_METHOD_13) {
+                rtl8168_mdio_write(tp, 0x1F, 0x0000);
+                gphy_val = rtl8168_mdio_read(tp, 0x0D);
+                gphy_val |= BIT_5;
+                rtl8168_mdio_write(tp, 0x0D, gphy_val);
+
+                rtl8168_mdio_write(tp, 0x1F, 0x0002);
+                gphy_val = rtl8168_mdio_read(tp, 0x0C);
+                gphy_val |= BIT_10;
+                rtl8168_mdio_write(tp, 0x0C, gphy_val);
+                rtl8168_mdio_write(tp, 0x1F, 0x0000);
+        } else if (tp->mcfg == CFG_METHOD_14 || tp->mcfg == CFG_METHOD_15) {
+                rtl8168_mdio_write(tp, 0x1F, 0x0007);
+                rtl8168_mdio_write(tp, 0x1E, 0x0023);
+                gphy_val = rtl8168_mdio_read(tp, 0x17) | BIT_1;
+                if (tp->RequiredSecLanDonglePatch)
+                        gphy_val &= ~(BIT_2);
+                else
+                        gphy_val |= (BIT_2);
+                rtl8168_mdio_write(tp, 0x17, gphy_val);
+                rtl8168_mdio_write(tp, 0x1F, 0x0000);
+
+                rtl8168_mdio_write(tp, 0x1f, 0x0005);
+                rtl8168_mdio_write(tp, 0x05, 0x8b80);
+                rtl8168_mdio_write(tp, 0x06, 0xc896);
+                rtl8168_mdio_write(tp, 0x1f, 0x0000);
+
+                rtl8168_mdio_write(tp, 0x1F, 0x0001);
+                rtl8168_mdio_write(tp, 0x0B, 0x6C20);
+                rtl8168_mdio_write(tp, 0x07, 0x2872);
+                rtl8168_mdio_write(tp, 0x1C, 0xEFFF);
+                rtl8168_mdio_write(tp, 0x1F, 0x0003);
+                rtl8168_mdio_write(tp, 0x14, 0x6420);
+                rtl8168_mdio_write(tp, 0x1F, 0x0000);
+
+                rtl8168_mdio_write(tp, 0x1F, 0x0002);
+                gphy_val = rtl8168_mdio_read(tp, 0x08) & 0x00FF;
+                rtl8168_mdio_write(tp, 0x08, gphy_val | 0x8000);
+                rtl8168_mdio_write(tp, 0x1F, 0x0000);
+
+                rtl8168_mdio_write(tp, 0x1F, 0x0007);
+                rtl8168_mdio_write(tp, 0x1E, 0x002D);
+                gphy_val = rtl8168_mdio_read(tp, 0x18);
+                rtl8168_mdio_write(tp, 0x18, gphy_val | 0x0010);
+                rtl8168_mdio_write(tp, 0x1F, 0x0000);
+                gphy_val = rtl8168_mdio_read(tp, 0x14);
+                rtl8168_mdio_write(tp, 0x14, gphy_val | 0x8000);
+
+                rtl8168_mdio_write(tp, 0x1F, 0x0002);
+                rtl8168_mdio_write(tp, 0x00, 0x080B);
+                rtl8168_mdio_write(tp, 0x0B, 0x09D7);
+                rtl8168_mdio_write(tp, 0x1F, 0x0000);
+
+                if (aspm) {
+                        if (HW_HAS_WRITE_PHY_MCU_RAM_CODE(tp)) {
+                                rtl8168_mdio_write(tp, 0x1f, 0x0000);
+                                rtl8168_mdio_write(tp, 0x15, 0x1006);
+                        }
+                }
+
+                rtl8168_mdio_write(tp, 0x1F, 0x0003);
+                rtl8168_mdio_write(tp, 0x19, 0x7F46);
+                rtl8168_mdio_write(tp, 0x1F, 0x0005);
+                rtl8168_mdio_write(tp, 0x05, 0x8AD2);
+                rtl8168_mdio_write(tp, 0x06, 0x6810);
+                rtl8168_mdio_write(tp, 0x05, 0x8AD4);
+                rtl8168_mdio_write(tp, 0x06, 0x8002);
+                rtl8168_mdio_write(tp, 0x05, 0x8ADE);
+                rtl8168_mdio_write(tp, 0x06, 0x8025);
+                rtl8168_mdio_write(tp, 0x1F, 0x0000);
+
+                rtl8168_mdio_write(tp, 0x1F, 0x0007);
+                rtl8168_mdio_write(tp, 0x1E, 0x002F);
+                rtl8168_mdio_write(tp, 0x15, 0x1919);
+                rtl8168_mdio_write(tp, 0x1F, 0x0000);
+
+                rtl8168_mdio_write(tp, 0x1F, 0x0007);
+                rtl8168_mdio_write(tp, 0x1E, 0x002D);
+                gphy_val = rtl8168_mdio_read(tp, 0x18);
+                rtl8168_mdio_write(tp, 0x18, gphy_val | 0x0040);
+                rtl8168_mdio_write(tp, 0x1F, 0x0000);
+
+                rtl8168_mdio_write(tp, 0x1F, 0x0005);
+                rtl8168_mdio_write(tp, 0x05, 0x8B86);
+                gphy_val = rtl8168_mdio_read(tp, 0x06);
+                rtl8168_mdio_write(tp, 0x06, gphy_val | 0x0001);
+                rtl8168_mdio_write(tp, 0x1F, 0x0000);
+
+                rtl8168_mdio_write(tp, 0x1F, 0x0007);
+                rtl8168_mdio_write(tp, 0x1E, 0x00AC);
+                rtl8168_mdio_write(tp, 0x18, 0x0006);
+                rtl8168_mdio_write(tp, 0x1F, 0x0000);
+        } else if (tp->mcfg == CFG_METHOD_16) {
+                rtl8168_mdio_write(tp, 0x1F, 0x0005);
+                rtl8168_mdio_write(tp, 0x05, 0x8B80);
+                gphy_val = rtl8168_mdio_read(tp, 0x06);
+                gphy_val |= BIT_2 | BIT_1;
+                rtl8168_mdio_write(tp, 0x06, gphy_val);
+                rtl8168_mdio_write(tp, 0x1f, 0x0000);
+
+                rtl8168_mdio_write(tp, 0x1f, 0x0004);
+                rtl8168_mdio_write(tp, 0x1f, 0x0007);
+                rtl8168_mdio_write(tp, 0x1e, 0x002D);
+                gphy_val = rtl8168_mdio_read(tp, 0x18);
+                gphy_val |= BIT_4;
+                rtl8168_mdio_write(tp, 0x18, gphy_val);
+                rtl8168_mdio_write(tp, 0x1f, 0x0002);
+                rtl8168_mdio_write(tp, 0x1f, 0x0000);
+                gphy_val = rtl8168_mdio_read(tp, 0x14);
+                gphy_val |= BIT_15;
+                rtl8168_mdio_write(tp, 0x14, gphy_val);
+
+                rtl8168_mdio_write(tp, 0x1F, 0x0000);
+                rtl8168_mdio_write(tp, 0x15, 0x1006);
+
+                rtl8168_mdio_write(tp, 0x1F, 0x0005);
+                rtl8168_mdio_write(tp, 0x05, 0x8B86);
+                gphy_val = rtl8168_mdio_read(tp, 0x06);
+                gphy_val |= BIT_0;
+                rtl8168_mdio_write(tp, 0x06, gphy_val);
+                rtl8168_mdio_write(tp, 0x1F, 0x0000);
+
+                rtl8168_mdio_write(tp, 0x1F, 0x0001);
+                rtl8168_mdio_write(tp, 0x0B, 0x6C14);
+                rtl8168_mdio_write(tp, 0x14, 0x7F3D);
+                rtl8168_mdio_write(tp, 0x1C, 0xFAFE);
+                rtl8168_mdio_write(tp, 0x08, 0x07C5);
+                rtl8168_mdio_write(tp, 0x10, 0xF090);
+                rtl8168_mdio_write(tp, 0x1F, 0x0003);
+                rtl8168_mdio_write(tp, 0x14, 0x641A);
+                rtl8168_mdio_write(tp, 0x1A, 0x0606);
+                rtl8168_mdio_write(tp, 0x12, 0xF480);
+                rtl8168_mdio_write(tp, 0x13, 0x0747);
+                rtl8168_mdio_write(tp, 0x1F, 0x0000);
+
+                rtl8168_mdio_write(tp, 0x1F, 0x0004);
+                rtl8168_mdio_write(tp, 0x1F, 0x0007);
+                rtl8168_mdio_write(tp, 0x1E, 0x0078);
+                rtl8168_mdio_write(tp, 0x15, 0xA408);
+                rtl8168_mdio_write(tp, 0x17, 0x5100);
+                rtl8168_mdio_write(tp, 0x19, 0x0008);
+                rtl8168_mdio_write(tp, 0x1F, 0x0002);
+                rtl8168_mdio_write(tp, 0x1F, 0x0000);
+
+                rtl8168_mdio_write(tp, 0x1F, 0x0003);
+                rtl8168_mdio_write(tp, 0x0D, 0x0207);
+                rtl8168_mdio_write(tp, 0x02, 0x5FD0);
+                rtl8168_mdio_write(tp, 0x1F, 0x0000);
+
+                rtl8168_mdio_write(tp, 0x1F, 0x0004);
+                rtl8168_mdio_write(tp, 0x1F, 0x0007);
+                rtl8168_mdio_write(tp, 0x1E, 0x00A1);
+                gphy_val = rtl8168_mdio_read(tp, 0x1A);
+                gphy_val &= ~BIT_2;
+                rtl8168_mdio_write(tp, 0x1A, gphy_val);
+                rtl8168_mdio_write(tp, 0x1F, 0x0002);
+                rtl8168_mdio_write(tp, 0x1F, 0x0000);
+
+                rtl8168_mdio_write(tp, 0x1F, 0x0004);
+                rtl8168_mdio_write(tp, 0x1F, 0x0007);
+                rtl8168_mdio_write(tp, 0x1E, 0x002D);
+                gphy_val = rtl8168_mdio_read(tp, 0x16);
+                gphy_val |= BIT_5;
+                rtl8168_mdio_write(tp, 0x16, gphy_val);
+                rtl8168_mdio_write(tp, 0x1F, 0x0002);
+                rtl8168_mdio_write(tp, 0x1F, 0x0000);
+
+                rtl8168_mdio_write(tp, 0x1F, 0x0004);
+                rtl8168_mdio_write(tp, 0x1F, 0x0007);
+                rtl8168_mdio_write(tp, 0x1E, 0x00AC);
+                rtl8168_mdio_write(tp, 0x18, 0x0006);
+                rtl8168_mdio_write(tp, 0x1F, 0x0002);
+                rtl8168_mdio_write(tp, 0x1F, 0x0000);
+
+                rtl8168_mdio_write(tp, 0x1F, 0x0003);
+                rtl8168_mdio_write(tp, 0x09, 0xA20F);
+                rtl8168_mdio_write(tp, 0x1F, 0x0000);
+
+                rtl8168_mdio_write(tp, 0x1F, 0x0005);
+                rtl8168_mdio_write(tp, 0x05, 0x8B5B);
+                rtl8168_mdio_write(tp, 0x06, 0x9222);
+                rtl8168_mdio_write(tp, 0x05, 0x8B6D);
+                rtl8168_mdio_write(tp, 0x06, 0x8000);
+                rtl8168_mdio_write(tp, 0x05, 0x8B76);
+                rtl8168_mdio_write(tp, 0x06, 0x8000);
+                rtl8168_mdio_write(tp, 0x1F, 0x0000);
+
+                if (pdev->subsystem_vendor == 0x1043 &&
+                    pdev->subsystem_device == 0x13F7) {
+
+                        static const u16 evl_phy_value[] = {
+                                0x8B56, 0x8B5F, 0x8B68, 0x8B71,
+                                0x8B7A, 0x8A7B, 0x8A7E, 0x8A81,
+                                0x8A84, 0x8A87
+                        };
+
+                        rtl8168_mdio_write(tp, 0x1F, 0x0005);
+                        for (i = 0; i < ARRAY_SIZE(evl_phy_value); i++) {
+                                rtl8168_mdio_write(tp, 0x05, evl_phy_value[i]);
+                                gphy_val = (0xAA << 8) | (rtl8168_mdio_read(tp, 0x06) & 0xFF);
+                                rtl8168_mdio_write(tp, 0x06, gphy_val);
+                        }
+                        rtl8168_mdio_write(tp, 0x1F, 0x0007);
+                        rtl8168_mdio_write(tp, 0x1E, 0x0078);
+                        rtl8168_mdio_write(tp, 0x17, 0x51AA);
+                        rtl8168_mdio_write(tp, 0x1F, 0x0000);
+                }
+
+                rtl8168_mdio_write(tp, 0x1f, 0x0005);
+                rtl8168_mdio_write(tp, 0x05, 0x8B54);
+                rtl8168_mdio_write(tp, 0x06, rtl8168_mdio_read(tp, 0x06) & ~BIT_11);
+                rtl8168_mdio_write(tp, 0x05, 0x8B5D);
+                rtl8168_mdio_write(tp, 0x06, rtl8168_mdio_read(tp, 0x06) & ~BIT_11);
+                rtl8168_mdio_write(tp, 0x05, 0x8A7C);
+                rtl8168_mdio_write(tp, 0x06, rtl8168_mdio_read(tp, 0x06) & ~BIT_8);
+                rtl8168_mdio_write(tp, 0x05, 0x8A7F);
+                rtl8168_mdio_write(tp, 0x06, rtl8168_mdio_read(tp, 0x06) | BIT_8);
+                rtl8168_mdio_write(tp, 0x05, 0x8A82);
+                rtl8168_mdio_write(tp, 0x06, rtl8168_mdio_read(tp, 0x06) & ~BIT_8);
+                rtl8168_mdio_write(tp, 0x05, 0x8A85);
+                rtl8168_mdio_write(tp, 0x06, rtl8168_mdio_read(tp, 0x06) & ~BIT_8);
+                rtl8168_mdio_write(tp, 0x05, 0x8A88);
+                rtl8168_mdio_write(tp, 0x06, rtl8168_mdio_read(tp, 0x06) & ~BIT_8);
+                rtl8168_mdio_write(tp, 0x1f, 0x0000);
+
+                rtl8168_mdio_write(tp, 0x1F, 0x0005);
+                rtl8168_mdio_write(tp, 0x05, 0x8B85);
+                gphy_val = rtl8168_mdio_read(tp, 0x06) | BIT_14 | BIT_15;
+                rtl8168_mdio_write(tp, 0x06, gphy_val);
+                rtl8168_mdio_write(tp, 0x1f, 0x0000);
+        } else if (tp->mcfg == CFG_METHOD_17) {
+                if (pdev->subsystem_vendor == 0x144d &&
+                    pdev->subsystem_device == 0xc0a6) {
+                        rtl8168_mdio_write(tp, 0x1F, 0x0001);
+                        rtl8168_mdio_write(tp, 0x0e, 0x6b7f);
+                        rtl8168_mdio_write(tp, 0x1f, 0x0000);
+                        rtl8168_mdio_write(tp, 0x1F, 0x0005);
+                        rtl8168_mdio_write(tp, 0x05, 0x8B86);
+                        gphy_val = rtl8168_mdio_read(tp, 0x06);
+                        gphy_val |= BIT_4;
+                        rtl8168_mdio_write(tp, 0x06, gphy_val);
+                        rtl8168_mdio_write(tp, 0x1f, 0x0000);
+                } else {
+                        rtl8168_mdio_write(tp, 0x1F, 0x0005);
+                        rtl8168_mdio_write(tp, 0x05, 0x8B80);
+                        gphy_val = rtl8168_mdio_read(tp, 0x06);
+                        gphy_val |= BIT_2 | BIT_1;
+                        rtl8168_mdio_write(tp, 0x06, gphy_val);
+                        rtl8168_mdio_write(tp, 0x1f, 0x0000);
+
+                        rtl8168_mdio_write(tp, 0x1F, 0x0005);
+                        rtl8168_mdio_write(tp, 0x05, 0x8B86);
+                        gphy_val = rtl8168_mdio_read(tp, 0x06);
+                        gphy_val &= ~BIT_4;
+                        rtl8168_mdio_write(tp, 0x06, gphy_val);
+                        rtl8168_mdio_write(tp, 0x1f, 0x0000);
+                }
+
+                rtl8168_mdio_write(tp, 0x1f, 0x0004);
+                rtl8168_mdio_write(tp, 0x1f, 0x0007);
+                rtl8168_mdio_write(tp, 0x1e, 0x002D);
+                gphy_val = rtl8168_mdio_read(tp, 0x18);
+                gphy_val |= BIT_4;
+                rtl8168_mdio_write(tp, 0x18, gphy_val);
+                rtl8168_mdio_write(tp, 0x1f, 0x0002);
+                rtl8168_mdio_write(tp, 0x1f, 0x0000);
+                gphy_val = rtl8168_mdio_read(tp, 0x14);
+                gphy_val |= BIT_15;
+                rtl8168_mdio_write(tp, 0x14, gphy_val);
+
+                rtl8168_mdio_write(tp, 0x1F, 0x0005);
+                rtl8168_mdio_write(tp, 0x05, 0x8B86);
+                gphy_val = rtl8168_mdio_read(tp, 0x06);
+                gphy_val |= BIT_0;
+                rtl8168_mdio_write(tp, 0x06, gphy_val);
+                rtl8168_mdio_write(tp, 0x1f, 0x0000);
+
+                rtl8168_mdio_write(tp, 0x1F, 0x0004);
+                rtl8168_mdio_write(tp, 0x1F, 0x0007);
+                rtl8168_mdio_write(tp, 0x1E, 0x00AC);
+                rtl8168_mdio_write(tp, 0x18, 0x0006);
+                rtl8168_mdio_write(tp, 0x1F, 0x0002);
+                rtl8168_mdio_write(tp, 0x1F, 0x0000);
+
+                rtl8168_mdio_write(tp, 0x1F, 0x0003);
+                rtl8168_mdio_write(tp, 0x09, 0xA20F);
+                rtl8168_mdio_write(tp, 0x1F, 0x0000);
+
+                rtl8168_mdio_write(tp, 0x1F, 0x0005);
+                rtl8168_mdio_write(tp, 0x05, 0x8B85);
+                gphy_val = rtl8168_mdio_read(tp, 0x06) | BIT_14 | BIT_15;
+                rtl8168_mdio_write(tp, 0x06, gphy_val);
+                rtl8168_mdio_write(tp, 0x1f, 0x0000);
+
+                rtl8168_mdio_write(tp, 0x1F, 0x0005);
+                rtl8168_mdio_write(tp, 0x05, 0x8B5B);
+                rtl8168_mdio_write(tp, 0x06, 0x9222);
+                rtl8168_mdio_write(tp, 0x05, 0x8B6D);
+                rtl8168_mdio_write(tp, 0x06, 0x8000);
+                rtl8168_mdio_write(tp, 0x05, 0x8B76);
+                rtl8168_mdio_write(tp, 0x06, 0x8000);
+                rtl8168_mdio_write(tp, 0x1F, 0x0000);
+
+                if (pdev->subsystem_vendor == 0x1043 &&
+                    pdev->subsystem_device == 0x13F7) {
+
+                        static const u16 evl_phy_value[] = {
+                                0x8B56, 0x8B5F, 0x8B68, 0x8B71,
+                                0x8B7A, 0x8A7B, 0x8A7E, 0x8A81,
+                                0x8A84, 0x8A87
+                        };
+
+                        rtl8168_mdio_write(tp, 0x1F, 0x0005);
+                        for (i = 0; i < ARRAY_SIZE(evl_phy_value); i++) {
+                                rtl8168_mdio_write(tp, 0x05, evl_phy_value[i]);
+                                gphy_val = (0xAA << 8) | (rtl8168_mdio_read(tp, 0x06) & 0xFF);
+                                rtl8168_mdio_write(tp, 0x06, gphy_val);
+                        }
+                        rtl8168_mdio_write(tp, 0x1F, 0x0007);
+                        rtl8168_mdio_write(tp, 0x1E, 0x0078);
+                        rtl8168_mdio_write(tp, 0x17, 0x51AA);
+                        rtl8168_mdio_write(tp, 0x1F, 0x0000);
+                }
+
+                rtl8168_mdio_write(tp, 0x1f, 0x0005);
+                rtl8168_mdio_write(tp, 0x05, 0x8B54);
+                rtl8168_mdio_write(tp, 0x06, rtl8168_mdio_read(tp, 0x06) & ~BIT_11);
+                rtl8168_mdio_write(tp, 0x05, 0x8B5D);
+                rtl8168_mdio_write(tp, 0x06, rtl8168_mdio_read(tp, 0x06) & ~BIT_11);
+                rtl8168_mdio_write(tp, 0x05, 0x8A7C);
+                rtl8168_mdio_write(tp, 0x06, rtl8168_mdio_read(tp, 0x06) & ~BIT_8);
+                rtl8168_mdio_write(tp, 0x05, 0x8A7F);
+                rtl8168_mdio_write(tp, 0x06, rtl8168_mdio_read(tp, 0x06) | BIT_8);
+                rtl8168_mdio_write(tp, 0x05, 0x8A82);
+                rtl8168_mdio_write(tp, 0x06, rtl8168_mdio_read(tp, 0x06) & ~BIT_8);
+                rtl8168_mdio_write(tp, 0x05, 0x8A85);
+                rtl8168_mdio_write(tp, 0x06, rtl8168_mdio_read(tp, 0x06) & ~BIT_8);
+                rtl8168_mdio_write(tp, 0x05, 0x8A88);
+                rtl8168_mdio_write(tp, 0x06, rtl8168_mdio_read(tp, 0x06) & ~BIT_8);
+                rtl8168_mdio_write(tp, 0x1f, 0x0000);
+
+                if (aspm) {
+                        if (HW_HAS_WRITE_PHY_MCU_RAM_CODE(tp)) {
+                                rtl8168_mdio_write(tp, 0x1f, 0x0000);
+                                gphy_val = rtl8168_mdio_read(tp, 0x15);
+                                gphy_val |= BIT_12;
+                                rtl8168_mdio_write(tp, 0x15, gphy_val);
+                        }
+                }
+        } else if (tp->mcfg == CFG_METHOD_18) {
+                if (HW_HAS_WRITE_PHY_MCU_RAM_CODE(tp)) {
+                        rtl8168_mdio_write(tp, 0x1F, 0x0005);
+                        rtl8168_mdio_write(tp, 0x05, 0x8b80);
+                        gphy_val = rtl8168_mdio_read(tp, 0x06);
+                        gphy_val |= BIT_2 | BIT_1;
+                        rtl8168_mdio_write(tp, 0x06, gphy_val);
+                        rtl8168_mdio_write(tp, 0x1F, 0x0000);
+                }
+
+                rtl8168_mdio_write(tp, 0x1f, 0x0007);
+                rtl8168_mdio_write(tp, 0x1e, 0x002D);
+                gphy_val = rtl8168_mdio_read(tp, 0x18);
+                gphy_val |= BIT_4;
+                rtl8168_mdio_write(tp, 0x18, gphy_val);
+                rtl8168_mdio_write(tp, 0x1f, 0x0000);
+                gphy_val = rtl8168_mdio_read(tp, 0x14);
+                gphy_val |= BIT_15;
+                rtl8168_mdio_write(tp, 0x14, gphy_val);
+
+                rtl8168_mdio_write(tp, 0x1F, 0x0005);
+                rtl8168_mdio_write(tp, 0x05, 0x8B86);
+                gphy_val = rtl8168_mdio_read(tp, 0x06);
+                gphy_val |= BIT_0;
+                rtl8168_mdio_write(tp, 0x06, gphy_val);
+                rtl8168_mdio_write(tp, 0x1f, 0x0000);
+
+                rtl8168_mdio_write(tp, 0x1F, 0x0005);
+                rtl8168_mdio_write(tp, 0x05, 0x8B85);
+                gphy_val = rtl8168_mdio_read(tp, 0x06);
+                gphy_val |= BIT_14;
+                rtl8168_mdio_write(tp, 0x06, gphy_val);
+                rtl8168_mdio_write(tp, 0x1f, 0x0000);
+
+                rtl8168_mdio_write(tp, 0x1F, 0x0003);
+                rtl8168_mdio_write(tp, 0x09, 0xA20F);
+                rtl8168_mdio_write(tp, 0x1F, 0x0000);
+
+                rtl8168_mdio_write(tp, 0x1F, 0x0005);
+                rtl8168_mdio_write(tp, 0x05, 0x8B55);
+                rtl8168_mdio_write(tp, 0x06, 0x0000);
+                rtl8168_mdio_write(tp, 0x05, 0x8B5E);
+                rtl8168_mdio_write(tp, 0x06, 0x0000);
+                rtl8168_mdio_write(tp, 0x05, 0x8B67);
+                rtl8168_mdio_write(tp, 0x06, 0x0000);
+                rtl8168_mdio_write(tp, 0x05, 0x8B70);
+                rtl8168_mdio_write(tp, 0x06, 0x0000);
+                rtl8168_mdio_write(tp, 0x1F, 0x0000);
+                rtl8168_mdio_write(tp, 0x1F, 0x0007);
+                rtl8168_mdio_write(tp, 0x1E, 0x0078);
+                rtl8168_mdio_write(tp, 0x17, 0x0000);
+                rtl8168_mdio_write(tp, 0x19, 0x00FB);
+                rtl8168_mdio_write(tp, 0x1F, 0x0000);
+
+                rtl8168_mdio_write(tp, 0x1F, 0x0005);
+                rtl8168_mdio_write(tp, 0x05, 0x8B79);
+                rtl8168_mdio_write(tp, 0x06, 0xAA00);
+                rtl8168_mdio_write(tp, 0x1F, 0x0000);
+
+                rtl8168_mdio_write(tp, 0x1f, 0x0003);
+                rtl8168_mdio_write(tp, 0x01, 0x328A);
+                rtl8168_mdio_write(tp, 0x1f, 0x0000);
+
+                rtl8168_mdio_write(tp, 0x1f, 0x0005);
+                rtl8168_mdio_write(tp, 0x05, 0x8B54);
+                rtl8168_mdio_write(tp, 0x06, rtl8168_mdio_read(tp, 0x06) & ~BIT_11);
+                rtl8168_mdio_write(tp, 0x05, 0x8B5D);
+                rtl8168_mdio_write(tp, 0x06, rtl8168_mdio_read(tp, 0x06) & ~BIT_11);
+                rtl8168_mdio_write(tp, 0x05, 0x8A7C);
+                rtl8168_mdio_write(tp, 0x06, rtl8168_mdio_read(tp, 0x06) & ~BIT_8);
+                rtl8168_mdio_write(tp, 0x05, 0x8A7F);
+                rtl8168_mdio_write(tp, 0x06, rtl8168_mdio_read(tp, 0x06) | BIT_8);
+                rtl8168_mdio_write(tp, 0x05, 0x8A82);
+                rtl8168_mdio_write(tp, 0x06, rtl8168_mdio_read(tp, 0x06) & ~BIT_8);
+                rtl8168_mdio_write(tp, 0x05, 0x8A85);
+                rtl8168_mdio_write(tp, 0x06, rtl8168_mdio_read(tp, 0x06) & ~BIT_8);
+                rtl8168_mdio_write(tp, 0x05, 0x8A88);
+                rtl8168_mdio_write(tp, 0x06, rtl8168_mdio_read(tp, 0x06) & ~BIT_8);
+                rtl8168_mdio_write(tp, 0x1f, 0x0000);
+
+                if (HW_HAS_WRITE_PHY_MCU_RAM_CODE(tp)) {
+                        rtl8168_mdio_write(tp, 0x1f, 0x0005);
+                        rtl8168_mdio_write(tp, 0x05, 0x8b85);
+                        rtl8168_mdio_write(tp, 0x06, rtl8168_mdio_read(tp, 0x06) | BIT_15);
+                        rtl8168_mdio_write(tp, 0x1f, 0x0000);
+                }
+
+                if (aspm) {
+                        if (HW_HAS_WRITE_PHY_MCU_RAM_CODE(tp)) {
+                                rtl8168_mdio_write(tp, 0x1f, 0x0000);
+                                gphy_val = rtl8168_mdio_read(tp, 0x15);
+                                gphy_val |= BIT_12;
+                                rtl8168_mdio_write(tp, 0x15, gphy_val);
+                        }
+                }
+        } else if (tp->mcfg == CFG_METHOD_19) {
+                if (HW_HAS_WRITE_PHY_MCU_RAM_CODE(tp)) {
+                        rtl8168_mdio_write(tp, 0x1F, 0x0005);
+                        rtl8168_mdio_write(tp, 0x05, 0x8b80);
+                        gphy_val = rtl8168_mdio_read(tp, 0x06);
+                        gphy_val |= BIT_2 | BIT_1;
+                        rtl8168_mdio_write(tp, 0x06, gphy_val);
+                        rtl8168_mdio_write(tp, 0x1F, 0x0000);
+                }
+
+                rtl8168_mdio_write(tp, 0x1f, 0x0007);
+                rtl8168_mdio_write(tp, 0x1e, 0x002D);
+                gphy_val = rtl8168_mdio_read(tp, 0x18);
+                gphy_val |= BIT_4;
+                rtl8168_mdio_write(tp, 0x18, gphy_val);
+                rtl8168_mdio_write(tp, 0x1f, 0x0000);
+                gphy_val = rtl8168_mdio_read(tp, 0x14);
+                gphy_val |= BIT_15;
+                rtl8168_mdio_write(tp, 0x14, gphy_val);
+
+                rtl8168_mdio_write(tp, 0x1F, 0x0005);
+                rtl8168_mdio_write(tp, 0x05, 0x8B86);
+                gphy_val = rtl8168_mdio_read(tp, 0x06);
+                gphy_val |= BIT_0;
+                rtl8168_mdio_write(tp, 0x06, gphy_val);
+                rtl8168_mdio_write(tp, 0x1f, 0x0000);
+
+                rtl8168_mdio_write(tp, 0x1f, 0x0005);
+                rtl8168_mdio_write(tp, 0x05, 0x8B54);
+                rtl8168_mdio_write(tp, 0x06, rtl8168_mdio_read(tp, 0x06) & ~BIT_11);
+                rtl8168_mdio_write(tp, 0x05, 0x8B5D);
+                rtl8168_mdio_write(tp, 0x06, rtl8168_mdio_read(tp, 0x06) & ~BIT_11);
+                rtl8168_mdio_write(tp, 0x05, 0x8A7C);
+                rtl8168_mdio_write(tp, 0x06, rtl8168_mdio_read(tp, 0x06) & ~BIT_8);
+                rtl8168_mdio_write(tp, 0x05, 0x8A7F);
+                rtl8168_mdio_write(tp, 0x06, rtl8168_mdio_read(tp, 0x06) | BIT_8);
+                rtl8168_mdio_write(tp, 0x05, 0x8A82);
+                rtl8168_mdio_write(tp, 0x06, rtl8168_mdio_read(tp, 0x06) & ~BIT_8);
+                rtl8168_mdio_write(tp, 0x05, 0x8A85);
+                rtl8168_mdio_write(tp, 0x06, rtl8168_mdio_read(tp, 0x06) & ~BIT_8);
+                rtl8168_mdio_write(tp, 0x05, 0x8A88);
+                rtl8168_mdio_write(tp, 0x06, rtl8168_mdio_read(tp, 0x06) & ~BIT_8);
+                rtl8168_mdio_write(tp, 0x1f, 0x0000);
+
+
+                rtl8168_mdio_write(tp, 0x1F, 0x0007);
+                rtl8168_mdio_write(tp, 0x1E, 0x0023);
+                rtl8168_clear_eth_phy_bit(tp, 0x17, BIT_1);
+                rtl8168_mdio_write(tp, 0x1F, 0x0000);
+
+
+                if (HW_HAS_WRITE_PHY_MCU_RAM_CODE(tp)) {
+                        rtl8168_mdio_write(tp, 0x1f, 0x0005);
+                        rtl8168_mdio_write(tp, 0x05, 0x8b85);
+                        rtl8168_mdio_write(tp, 0x06, rtl8168_mdio_read(tp, 0x06) | BIT_15);
+                        rtl8168_mdio_write(tp, 0x1f, 0x0000);
+                }
+
+                if (aspm) {
+                        if (HW_HAS_WRITE_PHY_MCU_RAM_CODE(tp)) {
+                                rtl8168_mdio_write(tp, 0x1f, 0x0000);
+                                gphy_val = rtl8168_mdio_read(tp, 0x15);
+                                gphy_val |= BIT_12;
+                                rtl8168_mdio_write(tp, 0x15, gphy_val);
+                        }
+                }
+        } else if (tp->mcfg == CFG_METHOD_20) {
+
+                if (HW_HAS_WRITE_PHY_MCU_RAM_CODE(tp)) {
+                        rtl8168_mdio_write(tp, 0x1F, 0x0005);
+                        rtl8168_mdio_write(tp, 0x05, 0x8b80);
+                        gphy_val = rtl8168_mdio_read(tp, 0x06);
+                        gphy_val |= BIT_2 | BIT_1;
+                        rtl8168_mdio_write(tp, 0x06, gphy_val);
+                        rtl8168_mdio_write(tp, 0x1F, 0x0000);
+                }
+
+                rtl8168_mdio_write(tp, 0x1f, 0x0007);
+                rtl8168_mdio_write(tp, 0x1e, 0x002D);
+                gphy_val = rtl8168_mdio_read(tp, 0x18);
+                gphy_val |= BIT_4;
+                rtl8168_mdio_write(tp, 0x18, gphy_val);
+                rtl8168_mdio_write(tp, 0x1f, 0x0000);
+                gphy_val = rtl8168_mdio_read(tp, 0x14);
+                gphy_val |= BIT_15;
+                rtl8168_mdio_write(tp, 0x14, gphy_val);
+
+                rtl8168_mdio_write(tp, 0x1F, 0x0005);
+                rtl8168_mdio_write(tp, 0x05, 0x8B86);
+                gphy_val = rtl8168_mdio_read(tp, 0x06);
+                gphy_val |= BIT_0;
+                rtl8168_mdio_write(tp, 0x06, gphy_val);
+                rtl8168_mdio_write(tp, 0x1f, 0x0000);
+
+                rtl8168_mdio_write(tp, 0x1F, 0x0005);
+                rtl8168_mdio_write(tp, 0x05, 0x8B85);
+                gphy_val = rtl8168_mdio_read(tp, 0x06);
+                gphy_val |= BIT_14;
+                rtl8168_mdio_write(tp, 0x06, gphy_val);
+                rtl8168_mdio_write(tp, 0x1f, 0x0000);
+
+                rtl8168_mdio_write(tp, 0x1F, 0x0003);
+                rtl8168_mdio_write(tp, 0x09, 0xA20F);
+                rtl8168_mdio_write(tp, 0x1F, 0x0000);
+
+                rtl8168_mdio_write(tp, 0x1F, 0x0005);
+                rtl8168_mdio_write(tp, 0x05, 0x8B55);
+                rtl8168_mdio_write(tp, 0x06, 0x0000);
+                rtl8168_mdio_write(tp, 0x05, 0x8B5E);
+                rtl8168_mdio_write(tp, 0x06, 0x0000);
+                rtl8168_mdio_write(tp, 0x05, 0x8B67);
+                rtl8168_mdio_write(tp, 0x06, 0x0000);
+                rtl8168_mdio_write(tp, 0x05, 0x8B70);
+                rtl8168_mdio_write(tp, 0x06, 0x0000);
+                rtl8168_mdio_write(tp, 0x1F, 0x0000);
+                rtl8168_mdio_write(tp, 0x1F, 0x0007);
+                rtl8168_mdio_write(tp, 0x1E, 0x0078);
+                rtl8168_mdio_write(tp, 0x17, 0x0000);
+                rtl8168_mdio_write(tp, 0x19, 0x00FB);
+                rtl8168_mdio_write(tp, 0x1F, 0x0000);
+
+                rtl8168_mdio_write(tp, 0x1F, 0x0005);
+                rtl8168_mdio_write(tp, 0x05, 0x8B79);
+                rtl8168_mdio_write(tp, 0x06, 0xAA00);
+                rtl8168_mdio_write(tp, 0x1F, 0x0000);
+
+                rtl8168_mdio_write(tp, 0x1f, 0x0005);
+                rtl8168_mdio_write(tp, 0x05, 0x8B54);
+                rtl8168_mdio_write(tp, 0x06, rtl8168_mdio_read(tp, 0x06) & ~BIT_11);
+                rtl8168_mdio_write(tp, 0x05, 0x8B5D);
+                rtl8168_mdio_write(tp, 0x06, rtl8168_mdio_read(tp, 0x06) & ~BIT_11);
+                rtl8168_mdio_write(tp, 0x05, 0x8A7C);
+                rtl8168_mdio_write(tp, 0x06, rtl8168_mdio_read(tp, 0x06) & ~BIT_8);
+                rtl8168_mdio_write(tp, 0x05, 0x8A7F);
+                rtl8168_mdio_write(tp, 0x06, rtl8168_mdio_read(tp, 0x06) | BIT_8);
+                rtl8168_mdio_write(tp, 0x05, 0x8A82);
+                rtl8168_mdio_write(tp, 0x06, rtl8168_mdio_read(tp, 0x06) & ~BIT_8);
+                rtl8168_mdio_write(tp, 0x05, 0x8A85);
+                rtl8168_mdio_write(tp, 0x06, rtl8168_mdio_read(tp, 0x06) & ~BIT_8);
+                rtl8168_mdio_write(tp, 0x05, 0x8A88);
+                rtl8168_mdio_write(tp, 0x06, rtl8168_mdio_read(tp, 0x06) & ~BIT_8);
+                rtl8168_mdio_write(tp, 0x1f, 0x0000);
+
+                if (HW_HAS_WRITE_PHY_MCU_RAM_CODE(tp)) {
+                        rtl8168_mdio_write(tp, 0x1f, 0x0005);
+                        rtl8168_mdio_write(tp, 0x05, 0x8b85);
+                        rtl8168_mdio_write(tp, 0x06, rtl8168_mdio_read(tp, 0x06) | BIT_15);
+                        rtl8168_mdio_write(tp, 0x1f, 0x0000);
+                }
+
+                if (aspm) {
+                        if (HW_HAS_WRITE_PHY_MCU_RAM_CODE(tp)) {
+                                rtl8168_mdio_write(tp, 0x1f, 0x0000);
+                                gphy_val = rtl8168_mdio_read(tp, 0x15);
+                                gphy_val |= BIT_12;
+                                rtl8168_mdio_write(tp, 0x15, gphy_val);
+                        }
+                }
+        } else if (tp->mcfg == CFG_METHOD_21) {
+                rtl8168_mdio_write(tp, 0x1F, 0x0A46);
+                gphy_val = rtl8168_mdio_read(tp, 0x10);
+                rtl8168_mdio_write(tp, 0x1F, 0x0BCC);
+                if (gphy_val & BIT_8)
+                        rtl8168_clear_eth_phy_bit(tp, 0x12, BIT_15);
+                else
+                        rtl8168_set_eth_phy_bit(tp, 0x12, BIT_15);
+                rtl8168_mdio_write(tp, 0x1F, 0x0A46);
+                gphy_val = rtl8168_mdio_read(tp, 0x13);
+                rtl8168_mdio_write(tp, 0x1F, 0x0C41);
+                if (gphy_val & BIT_8)
+                        rtl8168_set_eth_phy_bit(tp, 0x15, BIT_1);
+                else
+                        rtl8168_clear_eth_phy_bit(tp, 0x15, BIT_1);
+
+                rtl8168_mdio_write(tp, 0x1F, 0x0A44);
+                rtl8168_mdio_write(tp, 0x11, rtl8168_mdio_read(tp, 0x11) | BIT_2 | BIT_3);
+
+                rtl8168_mdio_write(tp, 0x1F, 0x0BCC);
+                rtl8168_mdio_write(tp, 0x14, rtl8168_mdio_read(tp, 0x14) & ~BIT_8);
+                rtl8168_mdio_write(tp, 0x1F, 0x0A44);
+                rtl8168_mdio_write(tp, 0x11, rtl8168_mdio_read(tp, 0x11) | BIT_7);
+                rtl8168_mdio_write(tp, 0x11, rtl8168_mdio_read(tp, 0x11) | BIT_6);
+                rtl8168_mdio_write(tp, 0x1F, 0x0A43);
+                rtl8168_mdio_write(tp, 0x13, 0x8084);
+                rtl8168_mdio_write(tp, 0x14, rtl8168_mdio_read(tp, 0x14) & ~(BIT_14 | BIT_13));
+                rtl8168_mdio_write(tp, 0x10, rtl8168_mdio_read(tp, 0x10) | BIT_12);
+                rtl8168_mdio_write(tp, 0x10, rtl8168_mdio_read(tp, 0x10) | BIT_1);
+                rtl8168_mdio_write(tp, 0x10, rtl8168_mdio_read(tp, 0x10) | BIT_0);
+
+                rtl8168_mdio_write(tp, 0x1F, 0x0A4B);
+                rtl8168_mdio_write(tp, 0x11, rtl8168_mdio_read(tp, 0x11) | BIT_2);
+
+                rtl8168_mdio_write(tp, 0x1F, 0x0A43);
+                rtl8168_mdio_write(tp, 0x13, 0x8012);
+                rtl8168_mdio_write(tp, 0x14, rtl8168_mdio_read(tp, 0x14) | BIT_15);
+
+                rtl8168_mdio_write(tp, 0x1F, 0x0C42);
+                gphy_val = rtl8168_mdio_read(tp, 0x11);
+                gphy_val |= BIT_14;
+                gphy_val &= ~BIT_13;
+                rtl8168_mdio_write(tp, 0x11, gphy_val);
+
+                rtl8168_mdio_write(tp, 0x1F, 0x0A43);
+                rtl8168_mdio_write(tp, 0x13, 0x809A);
+                rtl8168_mdio_write(tp, 0x14, 0x8022);
+                rtl8168_mdio_write(tp, 0x13, 0x80A0);
+                gphy_val = rtl8168_mdio_read(tp, 0x14) & 0x00FF;
+                gphy_val |= 0x1000;
+                rtl8168_mdio_write(tp, 0x14, gphy_val);
+                rtl8168_mdio_write(tp, 0x13, 0x8088);
+                rtl8168_mdio_write(tp, 0x14, 0x9222);
+
+                if (aspm) {
+                        if (HW_HAS_WRITE_PHY_MCU_RAM_CODE(tp)) {
+                                rtl8168_mdio_write(tp, 0x1F, 0x0A43);
+                                rtl8168_mdio_write(tp, 0x10, rtl8168_mdio_read(tp, 0x10) | BIT_2);
+                        }
+                }
+
+                rtl8168_mdio_write(tp, 0x1F, 0x0000);
+        } else if (tp->mcfg == CFG_METHOD_22) {
+                //do nothing
+        } else if (tp->mcfg == CFG_METHOD_23) {
+                rtl8168_mdio_write(tp, 0x1F, 0x0A44);
+                rtl8168_mdio_write(tp, 0x11, rtl8168_mdio_read(tp, 0x11) | (BIT_3 | BIT_2));
+                rtl8168_mdio_write(tp, 0x1F, 0x0000);
+
+                rtl8168_mdio_write(tp, 0x1F, 0x0BCC);
+                rtl8168_mdio_write(tp, 0x14, rtl8168_mdio_read(tp, 0x14) & ~BIT_8);
+                rtl8168_mdio_write(tp, 0x1F, 0x0A44);
+                rtl8168_mdio_write(tp, 0x11, rtl8168_mdio_read(tp, 0x11) | BIT_7);
+                rtl8168_mdio_write(tp, 0x11, rtl8168_mdio_read(tp, 0x11) | BIT_6);
+                rtl8168_mdio_write(tp, 0x1F, 0x0A43);
+                rtl8168_mdio_write(tp, 0x13, 0x8084);
+                rtl8168_mdio_write(tp, 0x14, rtl8168_mdio_read(tp, 0x14) & ~(BIT_14 | BIT_13));
+                rtl8168_mdio_write(tp, 0x10, rtl8168_mdio_read(tp, 0x10) | BIT_12);
+                rtl8168_mdio_write(tp, 0x10, rtl8168_mdio_read(tp, 0x10) | BIT_1);
+                rtl8168_mdio_write(tp, 0x10, rtl8168_mdio_read(tp, 0x10) | BIT_0);
+
+                rtl8168_mdio_write(tp, 0x1F, 0x0A4B);
+                rtl8168_mdio_write(tp, 0x11, rtl8168_mdio_read(tp, 0x11) | BIT_2);
+                rtl8168_mdio_write(tp, 0x1F, 0x0000);
+
+                rtl8168_mdio_write(tp, 0x1F, 0x0A43);
+                rtl8168_mdio_write(tp, 0x13, 0x8012);
+                rtl8168_mdio_write(tp, 0x14, rtl8168_mdio_read(tp, 0x14) | BIT_15);
+                rtl8168_mdio_write(tp, 0x1F, 0x0000);
+
+                rtl8168_mdio_write(tp, 0x1F, 0x0C42);
+                ClearAndSetEthPhyBit(tp,
+                                     0x11,
+                                     BIT_13,
+                                     BIT_14
+                                    );
+                rtl8168_mdio_write(tp, 0x1F, 0x0000);
+
+                if (aspm) {
+                        if (HW_HAS_WRITE_PHY_MCU_RAM_CODE(tp)) {
+                                rtl8168_mdio_write(tp, 0x1F, 0x0A43);
+                                rtl8168_mdio_write(tp, 0x10, rtl8168_mdio_read(tp, 0x10) | BIT_2);
+                        }
+                }
+        } else if (tp->mcfg == CFG_METHOD_24) {
+                rtl8168_mdio_write(tp, 0x1F, 0x0BCC);
+                rtl8168_mdio_write(tp, 0x14, rtl8168_mdio_read(tp, 0x14) & ~BIT_8);
+                rtl8168_mdio_write(tp, 0x1F, 0x0A44);
+                rtl8168_mdio_write(tp, 0x11, rtl8168_mdio_read(tp, 0x11) | BIT_7);
+                rtl8168_mdio_write(tp, 0x11, rtl8168_mdio_read(tp, 0x11) | BIT_6);
+                rtl8168_mdio_write(tp, 0x1F, 0x0A43);
+                rtl8168_mdio_write(tp, 0x13, 0x8084);
+                rtl8168_mdio_write(tp, 0x14, rtl8168_mdio_read(tp, 0x14) & ~(BIT_14 | BIT_13));
+                rtl8168_mdio_write(tp, 0x10, rtl8168_mdio_read(tp, 0x10) | BIT_12);
+                rtl8168_mdio_write(tp, 0x10, rtl8168_mdio_read(tp, 0x10) | BIT_1);
+                rtl8168_mdio_write(tp, 0x10, rtl8168_mdio_read(tp, 0x10) | BIT_0);
+                rtl8168_mdio_write(tp, 0x1F, 0x0A43);
+                rtl8168_mdio_write(tp, 0x13, 0x8012);
+                rtl8168_mdio_write(tp, 0x14, rtl8168_mdio_read(tp, 0x14) | BIT_15);
+
+                rtl8168_mdio_write(tp, 0x1F, 0x0C42);
+                gphy_val = rtl8168_mdio_read(tp, 0x11);
+                gphy_val |= BIT_14;
+                gphy_val &= ~BIT_13;
+                rtl8168_mdio_write(tp, 0x11, gphy_val);
+
+                if (aspm) {
+                        if (HW_HAS_WRITE_PHY_MCU_RAM_CODE(tp)) {
+                                rtl8168_mdio_write(tp, 0x1F, 0x0A43);
+                                rtl8168_mdio_write(tp, 0x10, rtl8168_mdio_read(tp, 0x10) | BIT_2);
+                        }
+                }
+        } else if (tp->mcfg == CFG_METHOD_25 || tp->mcfg == CFG_METHOD_26) {
+                rtl8168_mdio_write(tp, 0x1F, 0x0BCC);
+                rtl8168_mdio_write(tp, 0x14, rtl8168_mdio_read(tp, 0x14) & ~BIT_8);
+                rtl8168_mdio_write(tp, 0x1F, 0x0A44);
+                rtl8168_mdio_write(tp, 0x11, rtl8168_mdio_read(tp, 0x11) | BIT_7);
+                rtl8168_mdio_write(tp, 0x11, rtl8168_mdio_read(tp, 0x11) | BIT_6);
+                rtl8168_mdio_write(tp, 0x1F, 0x0A43);
+                rtl8168_mdio_write(tp, 0x13, 0x8084);
+                rtl8168_mdio_write(tp, 0x14, rtl8168_mdio_read(tp, 0x14) & ~(BIT_14 | BIT_13));
+                rtl8168_mdio_write(tp, 0x10, rtl8168_mdio_read(tp, 0x10) | BIT_12);
+                rtl8168_mdio_write(tp, 0x10, rtl8168_mdio_read(tp, 0x10) | BIT_1);
+                rtl8168_mdio_write(tp, 0x10, rtl8168_mdio_read(tp, 0x10) | BIT_0);
+
+                rtl8168_mdio_write(tp, 0x1F, 0x0A43);
+                rtl8168_mdio_write(tp, 0x13, 0x8012);
+                rtl8168_mdio_write(tp, 0x14, rtl8168_mdio_read(tp, 0x14) | BIT_15);
+
+                rtl8168_mdio_write(tp, 0x1F, 0x0BCE);
+                rtl8168_mdio_write(tp, 0x12, 0x8860);
+
+                rtl8168_mdio_write(tp, 0x1F, 0x0A43);
+                rtl8168_mdio_write(tp, 0x13, 0x80F3);
+                rtl8168_mdio_write(tp, 0x14, (rtl8168_mdio_read(tp, 0x14) & ~0xFF00) | 0x8B00);
+                rtl8168_mdio_write(tp, 0x13, 0x80F0);
+                rtl8168_mdio_write(tp, 0x14, (rtl8168_mdio_read(tp, 0x14) & ~0xFF00) | 0x3A00);
+                rtl8168_mdio_write(tp, 0x13, 0x80EF);
+                rtl8168_mdio_write(tp, 0x14, (rtl8168_mdio_read(tp, 0x14) & ~0xFF00) | 0x0500);
+                rtl8168_mdio_write(tp, 0x13, 0x80F6);
+                rtl8168_mdio_write(tp, 0x14, (rtl8168_mdio_read(tp, 0x14) & ~0xFF00) | 0x6E00);
+                rtl8168_mdio_write(tp, 0x13, 0x80EC);
+                rtl8168_mdio_write(tp, 0x14, (rtl8168_mdio_read(tp, 0x14) & ~0xFF00) | 0x6800);
+                rtl8168_mdio_write(tp, 0x13, 0x80ED);
+                rtl8168_mdio_write(tp, 0x14, (rtl8168_mdio_read(tp, 0x14) & ~0xFF00) | 0x7C00);
+                rtl8168_mdio_write(tp, 0x13, 0x80F2);
+                rtl8168_mdio_write(tp, 0x14, (rtl8168_mdio_read(tp, 0x14) & ~0xFF00) | 0xF400);
+                rtl8168_mdio_write(tp, 0x13, 0x80F4);
+                rtl8168_mdio_write(tp, 0x14, (rtl8168_mdio_read(tp, 0x14) & ~0xFF00) | 0x8500);
+                rtl8168_mdio_write(tp, 0x1F, 0x0A43);
+                rtl8168_mdio_write(tp, 0x13, 0x8110);
+                rtl8168_mdio_write(tp, 0x14, (rtl8168_mdio_read(tp, 0x14) & ~0xFF00) | 0xA800);
+                rtl8168_mdio_write(tp, 0x13, 0x810F);
+                rtl8168_mdio_write(tp, 0x14, (rtl8168_mdio_read(tp, 0x14) & ~0xFF00) | 0x1D00);
+                rtl8168_mdio_write(tp, 0x13, 0x8111);
+                rtl8168_mdio_write(tp, 0x14, (rtl8168_mdio_read(tp, 0x14) & ~0xFF00) | 0xF500);
+                rtl8168_mdio_write(tp, 0x13, 0x8113);
+                rtl8168_mdio_write(tp, 0x14, (rtl8168_mdio_read(tp, 0x14) & ~0xFF00) | 0x6100);
+                rtl8168_mdio_write(tp, 0x13, 0x8115);
+                rtl8168_mdio_write(tp, 0x14, (rtl8168_mdio_read(tp, 0x14) & ~0xFF00) | 0x9200);
+                rtl8168_mdio_write(tp, 0x13, 0x810E);
+                rtl8168_mdio_write(tp, 0x14, (rtl8168_mdio_read(tp, 0x14) & ~0xFF00) | 0x0400);
+                rtl8168_mdio_write(tp, 0x13, 0x810C);
+                rtl8168_mdio_write(tp, 0x14, (rtl8168_mdio_read(tp, 0x14) & ~0xFF00) | 0x7C00);
+                rtl8168_mdio_write(tp, 0x13, 0x810B);
+                rtl8168_mdio_write(tp, 0x14, (rtl8168_mdio_read(tp, 0x14) & ~0xFF00) | 0x5A00);
+                rtl8168_mdio_write(tp, 0x1F, 0x0A43);
+                rtl8168_mdio_write(tp, 0x13, 0x80D1);
+                rtl8168_mdio_write(tp, 0x14, (rtl8168_mdio_read(tp, 0x14) & ~0xFF00) | 0xFF00);
+                rtl8168_mdio_write(tp, 0x13, 0x80CD);
+                rtl8168_mdio_write(tp, 0x14, (rtl8168_mdio_read(tp, 0x14) & ~0xFF00) | 0x9E00);
+                rtl8168_mdio_write(tp, 0x13, 0x80D3);
+                rtl8168_mdio_write(tp, 0x14, (rtl8168_mdio_read(tp, 0x14) & ~0xFF00) | 0x0E00);
+                rtl8168_mdio_write(tp, 0x13, 0x80D5);
+                rtl8168_mdio_write(tp, 0x14, (rtl8168_mdio_read(tp, 0x14) & ~0xFF00) | 0xCA00);
+                rtl8168_mdio_write(tp, 0x13, 0x80D7);
+                rtl8168_mdio_write(tp, 0x14, (rtl8168_mdio_read(tp, 0x14) & ~0xFF00) | 0x8400);
+
+                if (aspm) {
+                        if (HW_HAS_WRITE_PHY_MCU_RAM_CODE(tp)) {
+                                rtl8168_mdio_write(tp, 0x1F, 0x0A43);
+                                rtl8168_mdio_write(tp, 0x10, rtl8168_mdio_read(tp, 0x10) | BIT_2);
+                        }
+                }
+        } else if (tp->mcfg == CFG_METHOD_27 || tp->mcfg == CFG_METHOD_28) {
+                rtl8168_mdio_write(tp, 0x1F, 0x0BCC);
+                rtl8168_mdio_write(tp, 0x14, rtl8168_mdio_read(tp, 0x14) & ~BIT_8);
+                rtl8168_mdio_write(tp, 0x1F, 0x0A44);
+                rtl8168_mdio_write(tp, 0x11, rtl8168_mdio_read(tp, 0x11) | BIT_7);
+                rtl8168_mdio_write(tp, 0x11, rtl8168_mdio_read(tp, 0x11) | BIT_6);
+                rtl8168_mdio_write(tp, 0x1F, 0x0A43);
+                rtl8168_mdio_write(tp, 0x13, 0x8084);
+                rtl8168_mdio_write(tp, 0x14, rtl8168_mdio_read(tp, 0x14) & ~(BIT_14 | BIT_13));
+                rtl8168_mdio_write(tp, 0x10, rtl8168_mdio_read(tp, 0x10) | BIT_12);
+                rtl8168_mdio_write(tp, 0x10, rtl8168_mdio_read(tp, 0x10) | BIT_1);
+                rtl8168_mdio_write(tp, 0x10, rtl8168_mdio_read(tp, 0x10) | BIT_0);
+
+                rtl8168_mdio_write(tp, 0x1F, 0x0A43);
+                rtl8168_mdio_write(tp, 0x13, 0x8012);
+                rtl8168_mdio_write(tp, 0x14, rtl8168_mdio_read(tp, 0x14) | BIT_15);
+
+                rtl8168_mdio_write(tp, 0x1F, 0x0C42);
+                rtl8168_mdio_write(tp, 0x11, (rtl8168_mdio_read(tp, 0x11) & ~BIT_13) | BIT_14);
+
+                rtl8168_mdio_write(tp, 0x1F, 0x0A43);
+                rtl8168_mdio_write(tp, 0x13, 0x80F3);
+                rtl8168_mdio_write(tp, 0x14, (rtl8168_mdio_read(tp, 0x14) & ~0xFF00) | 0x8B00);
+                rtl8168_mdio_write(tp, 0x13, 0x80F0);
+                rtl8168_mdio_write(tp, 0x14, (rtl8168_mdio_read(tp, 0x14) & ~0xFF00) | 0x3A00);
+                rtl8168_mdio_write(tp, 0x13, 0x80EF);
+                rtl8168_mdio_write(tp, 0x14, (rtl8168_mdio_read(tp, 0x14) & ~0xFF00) | 0x0500);
+                rtl8168_mdio_write(tp, 0x13, 0x80F6);
+                rtl8168_mdio_write(tp, 0x14, (rtl8168_mdio_read(tp, 0x14) & ~0xFF00) | 0x6E00);
+                rtl8168_mdio_write(tp, 0x13, 0x80EC);
+                rtl8168_mdio_write(tp, 0x14, (rtl8168_mdio_read(tp, 0x14) & ~0xFF00) | 0x6800);
+                rtl8168_mdio_write(tp, 0x13, 0x80ED);
+                rtl8168_mdio_write(tp, 0x14, (rtl8168_mdio_read(tp, 0x14) & ~0xFF00) | 0x7C00);
+                rtl8168_mdio_write(tp, 0x13, 0x80F2);
+                rtl8168_mdio_write(tp, 0x14, (rtl8168_mdio_read(tp, 0x14) & ~0xFF00) | 0xF400);
+                rtl8168_mdio_write(tp, 0x13, 0x80F4);
+                rtl8168_mdio_write(tp, 0x14, (rtl8168_mdio_read(tp, 0x14) & ~0xFF00) | 0x8500);
+                rtl8168_mdio_write(tp, 0x1F, 0x0A43);
+                rtl8168_mdio_write(tp, 0x13, 0x8110);
+                rtl8168_mdio_write(tp, 0x14, (rtl8168_mdio_read(tp, 0x14) & ~0xFF00) | 0xA800);
+                rtl8168_mdio_write(tp, 0x13, 0x810F);
+                rtl8168_mdio_write(tp, 0x14, (rtl8168_mdio_read(tp, 0x14) & ~0xFF00) | 0x1D00);
+                rtl8168_mdio_write(tp, 0x13, 0x8111);
+                rtl8168_mdio_write(tp, 0x14, (rtl8168_mdio_read(tp, 0x14) & ~0xFF00) | 0xF500);
+                rtl8168_mdio_write(tp, 0x13, 0x8113);
+                rtl8168_mdio_write(tp, 0x14, (rtl8168_mdio_read(tp, 0x14) & ~0xFF00) | 0x6100);
+                rtl8168_mdio_write(tp, 0x13, 0x8115);
+                rtl8168_mdio_write(tp, 0x14, (rtl8168_mdio_read(tp, 0x14) & ~0xFF00) | 0x9200);
+                rtl8168_mdio_write(tp, 0x13, 0x810E);
+                rtl8168_mdio_write(tp, 0x14, (rtl8168_mdio_read(tp, 0x14) & ~0xFF00) | 0x0400);
+                rtl8168_mdio_write(tp, 0x13, 0x810C);
+                rtl8168_mdio_write(tp, 0x14, (rtl8168_mdio_read(tp, 0x14) & ~0xFF00) | 0x7C00);
+                rtl8168_mdio_write(tp, 0x13, 0x810B);
+                rtl8168_mdio_write(tp, 0x14, (rtl8168_mdio_read(tp, 0x14) & ~0xFF00) | 0x5A00);
+                rtl8168_mdio_write(tp, 0x1F, 0x0A43);
+                rtl8168_mdio_write(tp, 0x13, 0x80D1);
+                rtl8168_mdio_write(tp, 0x14, (rtl8168_mdio_read(tp, 0x14) & ~0xFF00) | 0xFF00);
+                rtl8168_mdio_write(tp, 0x13, 0x80CD);
+                rtl8168_mdio_write(tp, 0x14, (rtl8168_mdio_read(tp, 0x14) & ~0xFF00) | 0x9E00);
+                rtl8168_mdio_write(tp, 0x13, 0x80D3);
+                rtl8168_mdio_write(tp, 0x14, (rtl8168_mdio_read(tp, 0x14) & ~0xFF00) | 0x0E00);
+                rtl8168_mdio_write(tp, 0x13, 0x80D5);
+                rtl8168_mdio_write(tp, 0x14, (rtl8168_mdio_read(tp, 0x14) & ~0xFF00) | 0xCA00);
+                rtl8168_mdio_write(tp, 0x13, 0x80D7);
+                rtl8168_mdio_write(tp, 0x14, (rtl8168_mdio_read(tp, 0x14) & ~0xFF00) | 0x8400);
+
+                if (aspm) {
+                        if (HW_HAS_WRITE_PHY_MCU_RAM_CODE(tp)) {
+                                rtl8168_mdio_write(tp, 0x1F, 0x0A43);
+                                rtl8168_mdio_write(tp, 0x10, rtl8168_mdio_read(tp, 0x10) | BIT_2);
+                        }
+                }
+                        } else if (tp->mcfg == CFG_METHOD_29) {
+                rtl8168_mdio_write(tp, 0x1F, 0x0A43);
+                rtl8168_mdio_write(tp, 0x13, 0x809b);
+                ClearAndSetEthPhyBit( tp,
+                                      0x14,
+                                      0xF800 ,
+                                      0x8000
+                                    );
+                rtl8168_mdio_write(tp, 0x13, 0x80A2);
+                ClearAndSetEthPhyBit( tp,
+                                      0x14,
+                                      0xFF00 ,
+                                      0x8000
+                                    );
+                rtl8168_mdio_write(tp, 0x13, 0x80A4);
+                ClearAndSetEthPhyBit( tp,
+                                      0x14,
+                                      0xFF00 ,
+                                      0x8500
+                                    );
+                rtl8168_mdio_write(tp, 0x13, 0x809C);
+                ClearAndSetEthPhyBit( tp,
+                                      0x14,
+                                      0xFF00 ,
+                                      0xbd00
+                                    );
+                rtl8168_mdio_write(tp, 0x1F, 0x0000);
+
+                rtl8168_mdio_write(tp, 0x1F, 0x0A43);
+                rtl8168_mdio_write(tp, 0x13, 0x80AD);
+                ClearAndSetEthPhyBit( tp,
+                                      0x14,
+                                      0xF800 ,
+                                      0x7000
+                                    );
+                rtl8168_mdio_write(tp, 0x13, 0x80B4);
+                ClearAndSetEthPhyBit( tp,
+                                      0x14,
+                                      0xFF00 ,
+                                      0x5000
+                                    );
+                rtl8168_mdio_write(tp, 0x13, 0x80AC);
+                ClearAndSetEthPhyBit( tp,
+                                      0x14,
+                                      0xFF00 ,
+                                      0x4000
+                                    );
+                rtl8168_mdio_write(tp, 0x1F, 0x0000);
+
+                rtl8168_mdio_write(tp, 0x1F, 0x0A43);
+                rtl8168_mdio_write(tp, 0x13, 0x808E);
+                ClearAndSetEthPhyBit( tp,
+                                      0x14,
+                                      0xFF00 ,
+                                      0x1200
+                                    );
+                rtl8168_mdio_write(tp, 0x13, 0x8090);
+                ClearAndSetEthPhyBit( tp,
+                                      0x14,
+                                      0xFF00 ,
+                                      0xE500
+                                    );
+                rtl8168_mdio_write(tp, 0x13, 0x8092);
+                ClearAndSetEthPhyBit( tp,
+                                      0x14,
+                                      0xFF00 ,
+                                      0x9F00
+                                    );
+                rtl8168_mdio_write(tp, 0x1F, 0x0000);
+
+                if (HW_HAS_WRITE_PHY_MCU_RAM_CODE(tp)) {
+                        u16 dout_tapbin;
+
+                        dout_tapbin = 0x0000;
+                        rtl8168_mdio_write( tp, 0x1F, 0x0A46 );
+                        gphy_val = rtl8168_mdio_read( tp, 0x13 );
+                        gphy_val &= (BIT_1|BIT_0);
+                        gphy_val <<= 2;
+                        dout_tapbin |= gphy_val;
+
+                        gphy_val = rtl8168_mdio_read( tp, 0x12 );
+                        gphy_val &= (BIT_15|BIT_14);
+                        gphy_val >>= 14;
+                        dout_tapbin |= gphy_val;
+
+                        dout_tapbin = ~( dout_tapbin^BIT_3 );
+                        dout_tapbin <<= 12;
+                        dout_tapbin &= 0xF000;
+
+                        rtl8168_mdio_write( tp, 0x1F, 0x0A43 );
+
+                        rtl8168_mdio_write( tp, 0x13, 0x827A );
+                        ClearAndSetEthPhyBit( tp,
+                                              0x14,
+                                              BIT_15|BIT_14|BIT_13|BIT_12,
+                                              dout_tapbin
+                                            );
+
+
+                        rtl8168_mdio_write( tp, 0x13, 0x827B );
+                        ClearAndSetEthPhyBit( tp,
+                                              0x14,
+                                              BIT_15|BIT_14|BIT_13|BIT_12,
+                                              dout_tapbin
+                                            );
+
+
+                        rtl8168_mdio_write( tp, 0x13, 0x827C );
+                        ClearAndSetEthPhyBit( tp,
+                                              0x14,
+                                              BIT_15|BIT_14|BIT_13|BIT_12,
+                                              dout_tapbin
+                                            );
+
+
+                        rtl8168_mdio_write( tp, 0x13, 0x827D );
+                        ClearAndSetEthPhyBit( tp,
+                                              0x14,
+                                              BIT_15|BIT_14|BIT_13|BIT_12,
+                                              dout_tapbin
+                                            );
+
+                        rtl8168_mdio_write(tp, 0x1F, 0x0A43);
+                        rtl8168_mdio_write(tp, 0x13, 0x8011);
+                        rtl8168_set_eth_phy_bit(tp, 0x14, BIT_11);
+                        rtl8168_mdio_write(tp, 0x1F, 0x0A42);
+                        rtl8168_set_eth_phy_bit(tp, 0x16, BIT_1);
+                }
+
+                rtl8168_mdio_write(tp, 0x1F, 0x0A44);
+                rtl8168_set_eth_phy_bit( tp, 0x11, BIT_11 );
+                rtl8168_mdio_write(tp, 0x1F, 0x0000);
+
+
+                rtl8168_mdio_write(tp, 0x1F, 0x0BCA);
+                ClearAndSetEthPhyBit( tp,
+                                      0x17,
+                                      (BIT_13 | BIT_12) ,
+                                      BIT_14
+                                    );
+                rtl8168_mdio_write(tp, 0x1F, 0x0000);
+
+                rtl8168_mdio_write(tp, 0x1F, 0x0A43);
+                rtl8168_mdio_write(tp, 0x13, 0x803F);
+                rtl8168_clear_eth_phy_bit( tp, 0x14, (BIT_13 | BIT_12));
+                rtl8168_mdio_write(tp, 0x13, 0x8047);
+                rtl8168_clear_eth_phy_bit( tp, 0x14, (BIT_13 | BIT_12));
+                rtl8168_mdio_write(tp, 0x13, 0x804F);
+                rtl8168_clear_eth_phy_bit( tp, 0x14, (BIT_13 | BIT_12));
+                rtl8168_mdio_write(tp, 0x13, 0x8057);
+                rtl8168_clear_eth_phy_bit( tp, 0x14, (BIT_13 | BIT_12));
+                rtl8168_mdio_write(tp, 0x13, 0x805F);
+                rtl8168_clear_eth_phy_bit( tp, 0x14, (BIT_13 | BIT_12));
+                rtl8168_mdio_write(tp, 0x13, 0x8067 );
+                rtl8168_clear_eth_phy_bit( tp, 0x14, (BIT_13 | BIT_12));
+                rtl8168_mdio_write(tp, 0x13, 0x806F );
+                rtl8168_clear_eth_phy_bit( tp, 0x14, (BIT_13 | BIT_12));
+                rtl8168_mdio_write(tp, 0x1F, 0x0000);
+
+                if (aspm) {
+                        if (HW_HAS_WRITE_PHY_MCU_RAM_CODE(tp)) {
+                                rtl8168_mdio_write(tp, 0x1F, 0x0A43);
+                                rtl8168_set_eth_phy_bit( tp, 0x10, BIT_2 );
+                                rtl8168_mdio_write(tp, 0x1F, 0x0000);
+                        }
+                }
+        } else if (tp->mcfg == CFG_METHOD_30 || tp->mcfg == CFG_METHOD_37) {
+                rtl8168_mdio_write(tp, 0x1F, 0x0A43);
+                rtl8168_mdio_write(tp, 0x13, 0x808A);
+                ClearAndSetEthPhyBit( tp,
+                                      0x14,
+                                      BIT_5 | BIT_4 | BIT_3 | BIT_2 | BIT_1 | BIT_0,
+                                      0x0A );
+
+                if (HW_HAS_WRITE_PHY_MCU_RAM_CODE(tp)) {
+                        rtl8168_mdio_write(tp, 0x1F, 0x0A43);
+                        rtl8168_mdio_write(tp, 0x13, 0x8011);
+                        rtl8168_set_eth_phy_bit(tp, 0x14, BIT_11);
+                        rtl8168_mdio_write(tp, 0x1F, 0x0A42);
+                        rtl8168_set_eth_phy_bit(tp, 0x16, BIT_1);
+                }
+
+                rtl8168_mdio_write(tp, 0x1F, 0x0A44);
+                rtl8168_set_eth_phy_bit( tp, 0x11, BIT_11 );
+                rtl8168_mdio_write(tp, 0x1F, 0x0000);
+
+                if (tp->RequireAdcBiasPatch) {
+                        rtl8168_mdio_write(tp, 0x1F, 0x0BCF);
+                        rtl8168_mdio_write(tp, 0x16, tp->AdcBiasPatchIoffset);
+                        rtl8168_mdio_write(tp, 0x1F, 0x0000);
+                }
+
+                {
+                        u16 rlen;
+
+                        rtl8168_mdio_write(tp, 0x1F, 0x0BCD);
+                        gphy_val = rtl8168_mdio_read( tp, 0x16 );
+                        gphy_val &= 0x000F;
+
+                        if ( gphy_val > 3 ) {
+                                rlen = gphy_val - 3;
+                        } else {
+                                rlen = 0;
+                        }
+
+                        gphy_val = rlen | (rlen<<4) | (rlen<<8) | (rlen<<12);
+
+                        rtl8168_mdio_write(tp, 0x1F, 0x0BCD);
+                        rtl8168_mdio_write(tp, 0x17, gphy_val);
+                        rtl8168_mdio_write(tp, 0x1F, 0x0000);
+                }
+
+                if (HW_HAS_WRITE_PHY_MCU_RAM_CODE(tp)) {
+                        rtl8168_mdio_write(tp, 0x1F, 0x0A43);
+                        rtl8168_mdio_write(tp, 0x13, 0x85FE);
+                        ClearAndSetEthPhyBit(
+                                tp,
+                                0x14,
+                                BIT_15|BIT_14|BIT_13|BIT_12|BIT_11|BIT_10|BIT_8,
+                                BIT_9);
+                        rtl8168_mdio_write(tp, 0x13, 0x85FF);
+                        ClearAndSetEthPhyBit(
+                                tp,
+                                0x14,
+                                BIT_15|BIT_14|BIT_13|BIT_12,
+                                BIT_11|BIT_10|BIT_9|BIT_8);
+                        rtl8168_mdio_write(tp, 0x13, 0x814B);
+                        ClearAndSetEthPhyBit(
+                                tp,
+                                0x14,
+                                BIT_15|BIT_14|BIT_13|BIT_11|BIT_10|BIT_9|BIT_8,
+                                BIT_12);
+                }
+
+
+                rtl8168_mdio_write(tp, 0x1F, 0x0C41);
+                rtl8168_clear_eth_phy_bit(tp, 0x15, BIT_1);
+                rtl8168_mdio_write(tp, 0x1F, 0x0000);
+
+
+                rtl8168_mdio_write(tp, 0x1F, 0x0A43);
+                rtl8168_set_eth_phy_bit(tp, 0x10, BIT_0);
+                rtl8168_mdio_write(tp, 0x1F, 0x0000);
+
+
+                if (aspm) {
+                        if (HW_HAS_WRITE_PHY_MCU_RAM_CODE(tp)) {
+                                rtl8168_mdio_write(tp, 0x1F, 0x0A43);
+                                rtl8168_set_eth_phy_bit( tp, 0x10, BIT_2 );
+                                rtl8168_mdio_write(tp, 0x1F, 0x0000);
+                        }
+                }
+        } else if (tp->mcfg == CFG_METHOD_31 || tp->mcfg == CFG_METHOD_32 ||
+                   tp->mcfg == CFG_METHOD_33 ||  tp->mcfg == CFG_METHOD_34) {
+                rtl8168_mdio_write(tp, 0x1F, 0x0A43);
+                rtl8168_mdio_write(tp, 0x13, 0x808E);
+                ClearAndSetEthPhyBit( tp,
+                                      0x14,
+                                      0xFF00 ,
+                                      0x4800
+                                    );
+                rtl8168_mdio_write(tp, 0x13, 0x8090);
+                ClearAndSetEthPhyBit( tp,
+                                      0x14,
+                                      0xFF00 ,
+                                      0xCC00
+                                    );
+                rtl8168_mdio_write(tp, 0x13, 0x8092);
+                ClearAndSetEthPhyBit( tp,
+                                      0x14,
+                                      0xFF00 ,
+                                      0xB000
+                                    );
+                rtl8168_mdio_write(tp, 0x13, 0x8088);
+                ClearAndSetEthPhyBit( tp,
+                                      0x14,
+                                      0xFF00 ,
+                                      0x6000
+                                    );
+                rtl8168_mdio_write(tp, 0x13, 0x808B);
+                ClearAndSetEthPhyBit( tp,
+                                      0x14,
+                                      0x3F00 ,
+                                      0x0B00
+                                    );
+                rtl8168_mdio_write(tp, 0x13, 0x808D);
+                ClearAndSetEthPhyBit( tp,
+                                      0x14,
+                                      0x1F00 ,
+                                      0x0600
+                                    );
+                rtl8168_mdio_write(tp, 0x13, 0x808C);
+                ClearAndSetEthPhyBit( tp,
+                                      0x14,
+                                      0xFF00 ,
+                                      0xB000
+                                    );
+
+                rtl8168_mdio_write(tp, 0x13, 0x80A0);
+                ClearAndSetEthPhyBit( tp,
+                                      0x14,
+                                      0xFF00 ,
+                                      0x2800
+                                    );
+                rtl8168_mdio_write(tp, 0x13, 0x80A2);
+                ClearAndSetEthPhyBit( tp,
+                                      0x14,
+                                      0xFF00 ,
+                                      0x5000
+                                    );
+                rtl8168_mdio_write(tp, 0x13, 0x809B);
+                ClearAndSetEthPhyBit( tp,
+                                      0x14,
+                                      0xF800 ,
+                                      0xB000
+                                    );
+                rtl8168_mdio_write(tp, 0x13, 0x809A);
+                ClearAndSetEthPhyBit( tp,
+                                      0x14,
+                                      0xFF00 ,
+                                      0x4B00
+                                    );
+                rtl8168_mdio_write(tp, 0x13, 0x809D);
+                ClearAndSetEthPhyBit( tp,
+                                      0x14,
+                                      0x3F00 ,
+                                      0x0800
+                                    );
+                rtl8168_mdio_write(tp, 0x13, 0x80A1);
+                ClearAndSetEthPhyBit( tp,
+                                      0x14,
+                                      0xFF00 ,
+                                      0x7000
+                                    );
+                rtl8168_mdio_write(tp, 0x13, 0x809F);
+                ClearAndSetEthPhyBit( tp,
+                                      0x14,
+                                      0x1F00 ,
+                                      0x0300
+                                    );
+                rtl8168_mdio_write(tp, 0x13, 0x809E);
+                ClearAndSetEthPhyBit( tp,
+                                      0x14,
+                                      0xFF00 ,
+                                      0x8800
+                                    );
+
+                rtl8168_mdio_write(tp, 0x13, 0x80B2);
+                ClearAndSetEthPhyBit( tp,
+                                      0x14,
+                                      0xFF00 ,
+                                      0x2200
+                                    );
+                rtl8168_mdio_write(tp, 0x13, 0x80AD);
+                ClearAndSetEthPhyBit( tp,
+                                      0x14,
+                                      0xF800 ,
+                                      0x9800
+                                    );
+                rtl8168_mdio_write(tp, 0x13, 0x80AF);
+                ClearAndSetEthPhyBit( tp,
+                                      0x14,
+                                      0x3F00 ,
+                                      0x0800
+                                    );
+                rtl8168_mdio_write(tp, 0x13, 0x80B3);
+                ClearAndSetEthPhyBit( tp,
+                                      0x14,
+                                      0xFF00 ,
+                                      0x6F00
+                                    );
+                rtl8168_mdio_write(tp, 0x13, 0x80B1);
+                ClearAndSetEthPhyBit( tp,
+                                      0x14,
+                                      0x1F00 ,
+                                      0x0300
+                                    );
+                rtl8168_mdio_write(tp, 0x13, 0x80B0);
+                ClearAndSetEthPhyBit( tp,
+                                      0x14,
+                                      0xFF00 ,
+                                      0x9300
+                                    );
+                rtl8168_mdio_write(tp, 0x1F, 0x0000);
+
+                rtl8168_mdio_write(tp, 0x1F, 0x0A43);
+                rtl8168_mdio_write(tp, 0x13, 0x8011);
+                rtl8168_clear_eth_phy_bit(tp, 0x14, BIT_11);
+                rtl8168_mdio_write(tp, 0x1F, 0x0000);
+
+                rtl8168_mdio_write(tp, 0x1F, 0x0A44);
+                rtl8168_set_eth_phy_bit(tp, 0x11, BIT_11);
+                rtl8168_mdio_write(tp, 0x1F, 0x0000);
+
+                rtl8168_mdio_write(tp, 0x1F, 0x0A43);
+                rtl8168_mdio_write(tp, 0x13, 0x8016);
+                rtl8168_set_eth_phy_bit(tp, 0x14, BIT_10);
+                rtl8168_mdio_write(tp, 0x1F, 0x0000);
+
+                if (aspm) {
+                        if (!HW_SUPP_SERDES_PHY(tp) &&
+                            HW_HAS_WRITE_PHY_MCU_RAM_CODE(tp)) {
+                                rtl8168_mdio_write(tp, 0x1F, 0x0A43);
+                                rtl8168_set_eth_phy_bit( tp, 0x10, BIT_2 );
+                                rtl8168_mdio_write(tp, 0x1F, 0x0000);
+                        }
+                }
+        } else if (tp->mcfg == CFG_METHOD_35) {
+                rtl8168_mdio_write(tp, 0x1F, 0x0A44);
+                rtl8168_set_eth_phy_bit(tp, 0x11, BIT_11);
+                rtl8168_mdio_write(tp, 0x1F, 0x0000);
+
+
+                rtl8168_mdio_write(tp, 0x1F, 0x0A4C);
+                rtl8168_clear_eth_phy_bit(tp, 0x15, (BIT_14 | BIT_13));
+                rtl8168_mdio_write(tp, 0x1F, 0x0000);
+
+
+                rtl8168_mdio_write(tp, 0x1F, 0x0A43);
+                rtl8168_mdio_write(tp, 0x13, 0x81B9);
+                rtl8168_mdio_write(tp, 0x14, 0x2000);
+                rtl8168_mdio_write(tp, 0x1F, 0x0000);
+
+
+                rtl8168_mdio_write(tp, 0x1F, 0x0A43);
+                rtl8168_mdio_write(tp, 0x13, 0x81D4);
+                ClearAndSetEthPhyBit(tp,
+                                     0x14,
+                                     0xFF00,
+                                     0x6600);
+                rtl8168_mdio_write(tp, 0x13, 0x81CB);
+                ClearAndSetEthPhyBit(tp,
+                                     0x14,
+                                     0xFF00,
+                                     0x3500);
+                rtl8168_mdio_write(tp, 0x1F, 0x0000);
+
+
+                rtl8168_mdio_write(tp, 0x1F, 0x0A80);
+                ClearAndSetEthPhyBit(tp,
+                                     0x16,
+                                     0x000F,
+                                     0x0005);
+                rtl8168_mdio_write(tp, 0x1F, 0x0A43);
+                rtl8168_mdio_write(tp, 0x13, 0x8016);
+                rtl8168_set_eth_phy_bit(tp, 0x14, BIT_13);
+                rtl8168_mdio_write(tp, 0x1F, 0x0000);
+
+                rtl8168_mdio_write(tp, 0x1F, 0x0A43);
+                rtl8168_mdio_write(tp, 0x13, 0x811E);
+                rtl8168_mdio_write(tp, 0x14, 0xDECA);
+
+                rtl8168_mdio_write(tp, 0x13, 0x811C);
+                rtl8168_mdio_write(tp, 0x14, 0x8008);
+                rtl8168_mdio_write(tp, 0x13, 0x8118);
+                rtl8168_mdio_write(tp, 0x14, 0xF8B4);
+                rtl8168_mdio_write(tp, 0x13, 0x811A);
+                rtl8168_mdio_write(tp, 0x14, 0x1A04);
+
+                rtl8168_mdio_write(tp, 0x13, 0x8134);
+                rtl8168_mdio_write(tp, 0x14, 0xDECA);
+                rtl8168_mdio_write(tp, 0x13, 0x8132);
+                rtl8168_mdio_write(tp, 0x14, 0xA008);
+                rtl8168_mdio_write(tp, 0x13, 0x812E);
+                rtl8168_mdio_write(tp, 0x14, 0x00B5);
+                rtl8168_mdio_write(tp, 0x13, 0x8130);
+                rtl8168_mdio_write(tp, 0x14, 0x1A04);
+
+                rtl8168_mdio_write(tp, 0x13, 0x8112);
+                ClearAndSetEthPhyBit(tp,
+                                     0x14,
+                                     0xFF00,
+                                     0x7300);
+                rtl8168_mdio_write(tp, 0x13, 0x8106);
+                rtl8168_mdio_write(tp, 0x14, 0xA209);
+                rtl8168_mdio_write(tp, 0x13, 0x8108);
+                rtl8168_mdio_write(tp, 0x14, 0x13B0);
+                rtl8168_mdio_write(tp, 0x13, 0x8103);
+                ClearAndSetEthPhyBit(tp,
+                                     0x14,
+                                     0xF800,
+                                     0xB800);
+                rtl8168_mdio_write(tp, 0x13, 0x8105);
+                ClearAndSetEthPhyBit(tp,
+                                     0x14,
+                                     0xFF00,
+                                     0x0A00);
+
+
+                rtl8168_mdio_write(tp, 0x1F, 0x0A43);
+                rtl8168_mdio_write(tp, 0x13, 0x87EB);
+                rtl8168_mdio_write(tp, 0x14, 0x0018);
+                rtl8168_mdio_write(tp, 0x13, 0x87EB);
+                rtl8168_mdio_write(tp, 0x14, 0x0018);
+                rtl8168_mdio_write(tp, 0x13, 0x87ED);
+                rtl8168_mdio_write(tp, 0x14, 0x0733);
+                rtl8168_mdio_write(tp, 0x13, 0x87EF);
+                rtl8168_mdio_write(tp, 0x14, 0x08DC);
+                rtl8168_mdio_write(tp, 0x13, 0x87F1);
+                rtl8168_mdio_write(tp, 0x14, 0x08DF);
+                rtl8168_mdio_write(tp, 0x13, 0x87F3);
+                rtl8168_mdio_write(tp, 0x14, 0x0C79);
+                rtl8168_mdio_write(tp, 0x13, 0x87F5);
+                rtl8168_mdio_write(tp, 0x14, 0x0D93);
+                rtl8168_mdio_write(tp, 0x13, 0x87F9);
+                rtl8168_mdio_write(tp, 0x14, 0x0010);
+                rtl8168_mdio_write(tp, 0x13, 0x87FB);
+                rtl8168_mdio_write(tp, 0x14, 0x0800);
+                rtl8168_mdio_write(tp, 0x13, 0x8015);
+                ClearAndSetEthPhyBit(tp,
+                                     0x14,
+                                     0x7000,
+                                     0x7000);
+
+
+                rtl8168_mdio_write(tp, 0x1F, 0x0A43);
+                rtl8168_mdio_write(tp, 0x13, 0x8111);
+                ClearAndSetEthPhyBit(tp,
+                                     0x14,
+                                     0xFF00,
+                                     0x7C00);
+                rtl8168_mdio_write(tp, 0x1F, 0x0000);
+
+                if (aspm) {
+                        if (HW_HAS_WRITE_PHY_MCU_RAM_CODE(tp)) {
+                                rtl8168_mdio_write(tp, 0x1F, 0x0A43);
+                                rtl8168_set_eth_phy_bit( tp, 0x10, BIT_2 );
+                                rtl8168_mdio_write(tp, 0x1F, 0x0000);
+                        }
+                }
+        } else if (tp->mcfg == CFG_METHOD_36) {
+                rtl8168_mdio_write(tp, 0x1F, 0x0A44);
+                rtl8168_set_eth_phy_bit(tp, 0x11, BIT_11);
+                rtl8168_mdio_write(tp, 0x1F, 0x0000);
+
+
+                rtl8168_mdio_write(tp, 0x1F, 0x0C41);
+                rtl8168_clear_eth_phy_bit(tp, 0x15, BIT_1);
+                rtl8168_mdio_write(tp, 0x1F, 0x0000);
+
+
+                if (aspm) {
+                        if (HW_HAS_WRITE_PHY_MCU_RAM_CODE(tp)) {
+                                rtl8168_mdio_write(tp, 0x1F, 0x0A43);
+                                rtl8168_set_eth_phy_bit( tp, 0x10, BIT_2 );
+                                rtl8168_mdio_write(tp, 0x1F, 0x0000);
+                        }
+                }
         } else {
             mdio_write(tp, 0x1F, 0x0002);
             mdio_write(tp, 0x05, 0x2642);
@@ -17565,6 +19682,16 @@ rtl8168_hw_start(struct net_device *dev)
         case CFG_METHOD_25:
         case CFG_METHOD_26:
         case CFG_METHOD_27:
+        case CFG_METHOD_28:
+        case CFG_MTEHOD_29:
+        case CFG_METHOD_30:
+        case CFG_METHOD_31:
+        case CFG_METHOD_32:
+        case CFG_METHOD_33:
+        case CFG_METHOD_34:
+        case CFG_METHOD_35:
+        case CFG_METHOD_36:
+        case CFG_METHOD_37:
             RTL_W8(0xF1, RTL_R8(0xF1) & ~BIT_7);
             RTL_W8(Config2, RTL_R8(Config2) & ~BIT_7);
             RTL_W8(Config5, RTL_R8(Config5) & ~BIT_0);
@@ -18328,6 +20455,16 @@ rtl8168_hw_start(struct net_device *dev)
         case CFG_METHOD_25:
         case CFG_METHOD_26:
         case CFG_METHOD_27:
+        case CFG_METHOD_28:
+        case CFG_MTEHOD_29:
+        case CFG_METHOD_30:
+        case CFG_METHOD_31:
+        case CFG_METHOD_32:
+        case CFG_METHOD_33:
+        case CFG_METHOD_34:
+        case CFG_METHOD_35:
+        case CFG_METHOD_36:
+        case CFG_METHOD_37:
             if (aspm) {
                 rtl8168_init_pci_offset_99(tp);
             }
@@ -18338,6 +20475,16 @@ rtl8168_hw_start(struct net_device *dev)
         case CFG_METHOD_25:
         case CFG_METHOD_26:
         case CFG_METHOD_27:
+        case CFG_METHOD_28:
+        case CFG_MTEHOD_29:
+        case CFG_METHOD_30:
+        case CFG_METHOD_31:
+        case CFG_METHOD_32:
+        case CFG_METHOD_33:
+        case CFG_METHOD_34:
+        case CFG_METHOD_35:
+        case CFG_METHOD_36:
+        case CFG_METHOD_37:
             if (aspm) {
                 rtl8168_init_pci_offset_180(tp);
             }
@@ -18362,7 +20509,17 @@ rtl8168_hw_start(struct net_device *dev)
         case CFG_METHOD_24:
         case CFG_METHOD_25:
         case CFG_METHOD_26:
-        case CFG_METHOD_27: {
+        case CFG_METHOD_27:
+        case CFG_METHOD_28:
+        case CFG_MTEHOD_29:
+        case CFG_METHOD_30:
+        case CFG_METHOD_31:
+        case CFG_METHOD_32:
+        case CFG_METHOD_33:
+        case CFG_METHOD_34:
+        case CFG_METHOD_35:
+        case CFG_METHOD_36:
+        case CFG_METHOD_37: 
             int timeout;
             for (timeout = 0; timeout < 10; timeout++) {
                 if ((rtl8168_eri_read(ioaddr, 0x1AE, 2, ERIAR_ExGMAC) & BIT_13)==0)
@@ -18420,6 +20577,16 @@ rtl8168_hw_start(struct net_device *dev)
         case CFG_METHOD_25:
         case CFG_METHOD_26:
         case CFG_METHOD_27:
+        case CFG_METHOD_28:
+        case CFG_MTEHOD_29:
+        case CFG_METHOD_30:
+        case CFG_METHOD_31:
+        case CFG_METHOD_32:
+        case CFG_METHOD_33:
+        case CFG_METHOD_34:
+        case CFG_METHOD_35:
+        case CFG_METHOD_36:
+        case CFG_METHOD_37:
             if (aspm) {
                 RTL_W8(Config5, RTL_R8(Config5) | BIT_0);
                 RTL_W8(Config2, RTL_R8(Config2) | BIT_7);
@@ -19489,7 +21656,7 @@ void rtl8168_sleep_rx_enable(struct net_device *dev)
     
 #if  DISABLED_CODE
 
-    static void rtl8168_down(struct net_device *dev)
+static void rtl8168_down(struct net_device *dev)
 {
     struct rtl8168_private *tp = netdev_priv(dev);
     unsigned long flags;
@@ -19793,7 +21960,6 @@ static int rtl8168_close(struct net_device *dev)
     
     module_init(rtl8168_init_module);
     module_exit(rtl8168_cleanup_module);
-    
     
 #endif /* DISABLED_CODE */
     
